@@ -14,8 +14,9 @@
             <TableColumn prefWidth="89.33334636688232" text="Name" />
             <TableColumn minWidth="0.0" prefWidth="118.6666488647461" text="Place" />
             <TableColumn prefWidth="85.33332824707031" text="Date" />
-            <TableColumn minWidth="8.0" prefWidth="85.33331298828125" text="Total Tickets" />
-            <TableColumn prefWidth="346.66667683919275" text="Description" />
+            <TableColumn prefWidth="75.0" text="Time" />
+            <TableColumn minWidth="8.0" prefWidth="73.3333740234375" text="Total Tickets" />
+            <TableColumn prefWidth="359.33331298828125" text="Description" />
          </columns>
       </TableView>
       <Button layoutX="119.0" layoutY="387.0" mnemonicParsing="false" text="Remove Event" />
