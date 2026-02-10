@@ -4,3 +4,22 @@
     -fx-border-radius: 70;
     -fx-background-radius: 70;
 }
+
+.logout-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff3b30;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-padding: 8 15;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+.logout-button:hover {
+    -fx-background-color: #fff5f5;
+    -fx-background-radius: 6;
+}
+
+.logout-icon {
+    -fx-fill: #ff3b30;
+}
