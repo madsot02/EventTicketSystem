@@ -23,7 +23,7 @@ public class LoginController {
         String passwordAdmin = "admin";
 
         if(txtUsername.getText().equals(username) && pswPassword.getText().equals(password)){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketgui/CoordinatorView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
 
@@ -34,7 +34,7 @@ public class LoginController {
             stage.show();
         }
         else if (txtUsername.getText().equals(usernameAdmin) && pswPassword.getText().equals(passwordAdmin)){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/ticketgui/AdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/AdminView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
 
