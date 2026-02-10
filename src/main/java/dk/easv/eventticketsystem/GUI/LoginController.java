@@ -3,6 +3,7 @@ package dk.easv.eventticketsystem.GUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,6 +44,9 @@ public class LoginController {
 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
+
+            Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            loginStage.close();
 
         }
     }

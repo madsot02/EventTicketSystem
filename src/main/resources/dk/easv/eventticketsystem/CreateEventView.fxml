@@ -12,42 +12,42 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="650.0" prefWidth="560.0" styleClass="dialog-root" stylesheets="@../../../../../../../EventTicketGui/src/main/resources/dk/easv/ticketgui/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.ticketgui.CreateEventController">
+<BorderPane prefHeight="650.0" prefWidth="560.0" stylesheets="@../../../../../../../EventTicketGui/src/main/resources/dk/easv/ticketgui/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.CreateEventController">
    <top>
-      <HBox alignment="CENTER_LEFT" styleClass="dialog-header">
+      <HBox alignment="CENTER_LEFT">
          <padding>
             <Insets bottom="20" left="25" right="25" top="20" />
          </padding>
          <children>
             <Label text="Create New Event" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="closeButton" onAction="#handleClose" styleClass="close-button">
+            <Button fx:id="closeButton" onAction="#handleClose">
                <graphic>
-                  <SVGPath content="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" styleClass="close-icon" />
+                  <SVGPath content="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                </graphic>
             </Button>
          </children>
       </HBox>
    </top>
    <center>
-      <VBox spacing="20" styleClass="form-container">
+      <VBox spacing="20" >
          <padding>
             <Insets bottom="20" left="25" right="25" top="10" />
          </padding>
          <children>
-            <VBox spacing="15" styleClass="form-section required-section">
+            <VBox spacing="15" >
                <padding>
                   <Insets bottom="20" left="20" right="20" top="20" />
                </padding>
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="8">
                      <children>
-                        <Label styleClass="section-badge required-badge" text="REQUIRED">
+                        <Label text="REQUIRED">
                            <font>
                               <Font name="System Bold" size="10" />
                            </font>
                         </Label>
-                        <Label styleClass="section-title" text="Essential Information">
+                        <Label text="Essential Information">
                            <font>
                               <Font name="System" size="14" />
                            </font>
@@ -56,19 +56,19 @@
                   </HBox>
                   <VBox spacing="6">
                      <children>
-                        <Label styleClass="field-label" text="Event Name">
+                        <Label text="Event Name">
                            <font>
                               <Font size="13" />
                            </font>
                         </Label>
-                        <TextField promptText="Enter event name" styleClass="text-field" />
+                        <TextField promptText="Enter event name" />
                      </children>
                   </VBox>
                   <HBox spacing="15">
                      <children>
                         <VBox spacing="6" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="field-label" text="Date">
+                              <Label text="Date">
                                  <font>
                                     <Font size="13" />
                                  </font>
@@ -78,7 +78,7 @@
                         </VBox>
                         <VBox spacing="6" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label styleClass="field-label" text="Time">
+                              <Label text="Time">
                                  <font>
                                     <Font size="13" />
                                  </font>
@@ -90,22 +90,22 @@
                   </HBox>
                   <VBox spacing="6">
                      <children>
-                        <Label styleClass="field-label" text="Location ">
+                        <Label text="Location ">
                            <font>
                               <Font size="13" />
                            </font>
                         </Label>
-                        <TextField promptText="Enter event location" styleClass="text-field" />
+                        <TextField promptText="Enter event location" />
                      </children>
                   </VBox>
                   <VBox spacing="6">
                      <children>
-                        <Label styleClass="field-label" text="Notes ">
+                        <Label text="Notes ">
                            <font>
                               <Font size="13" />
                            </font>
                         </Label>
-                        <TextArea prefRowCount="4" promptText="Important notes or instructions" styleClass="text-area" wrapText="true" />
+                        <TextArea prefRowCount="4" promptText="Important notes or instructions" wrapText="true" />
                      </children>
                   </VBox>
                </children>
@@ -114,7 +114,7 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="dialog-footer">
+      <HBox alignment="CENTER_RIGHT" spacing="15">
          <padding>
             <Insets bottom="25" left="25" right="25" top="20" />
          </padding>
