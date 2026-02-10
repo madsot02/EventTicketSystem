@@ -1,46 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView layoutX="3.0" layoutY="159.0" prefHeight="213.0" prefWidth="709.0">
-         <columns>
-            <TableColumn prefWidth="89.33334636688232" text="Name" />
-            <TableColumn minWidth="0.0" prefWidth="118.6666488647461" text="Place" />
-            <TableColumn prefWidth="85.33332824707031" text="Date" />
-            <TableColumn prefWidth="75.0" text="Time" />
-            <TableColumn minWidth="8.0" prefWidth="73.3333740234375" text="Total Tickets" />
-            <TableColumn prefWidth="359.33331298828125" text="Description" />
-         </columns>
-      </TableView>
-      <Button layoutX="119.0" layoutY="387.0" mnemonicParsing="false" text="Remove Event" />
-      <Button layoutX="23.0" layoutY="387.0" mnemonicParsing="false" text="Create Event" />
-      <Pane layoutX="45.0" layoutY="54.0" prefHeight="74.0" prefWidth="147.0" style="-fx-border-color: black;">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.CoordinatorController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Total Events" />
-            <Label layoutX="14.0" layoutY="37.0" text="TAL" />
+            <HBox prefHeight="95.0" prefWidth="600.0">
+               <children>
+                  <Label text="Coordinator Dashboard" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Logout" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="300.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="116.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="80.0" prefWidth="58.0" />
+                  <VBox prefHeight="100.0" prefWidth="220.0">
+                     <children>
+                        <Pane prefHeight="74.0" prefWidth="140.0" style="-fx-border-color: black;" VBox.vgrow="NEVER">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Total Events" />
+                              <Label layoutX="14.0" layoutY="37.0" text="TAL" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="80.0" prefWidth="42.0" />
+                  <VBox prefHeight="100.0" prefWidth="226.0">
+                     <children>
+                        <Pane prefHeight="74.0" prefWidth="147.0" style="-fx-border-color: black;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Upcoming Events" />
+                              <Label layoutX="14.0" layoutY="37.0" text="TAL" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="80.0" prefWidth="42.0" />
+                  <VBox prefHeight="100.0" prefWidth="194.0">
+                     <children>
+                        <Pane prefHeight="74.0" prefWidth="147.0" style="-fx-border-color: black;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Total Tickets" />
+                              <Label layoutX="14.0" layoutY="37.0" text="TAL" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="80.0" prefWidth="58.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="243.0" prefWidth="600.0">
+               <children>
+                  <TableView prefHeight="185.0" prefWidth="598.0">
+                     <columns>
+                        <TableColumn prefWidth="89.33334636688232" text="Name" />
+                        <TableColumn minWidth="0.0" prefWidth="118.6666488647461" text="Place" />
+                        <TableColumn prefWidth="85.33332824707031" text="Date" />
+                        <TableColumn prefWidth="75.0" text="Time" />
+                        <TableColumn minWidth="8.0" prefWidth="91.20001220703125" text="Total Tickets" />
+                        <TableColumn prefWidth="136.00003662109373" text="Description" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Remove Event" HBox.hgrow="NEVER">
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Create Event">
+                     <HBox.margin>
+                        <Insets left="25.0" top="25.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
-      </Pane>
-      <Pane layoutX="203.0" layoutY="54.0" prefHeight="74.0" prefWidth="147.0" style="-fx-border-color: black;">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Upcoming Events" />
-            <Label layoutX="14.0" layoutY="37.0" text="TAL" />
-         </children>
-      </Pane>
-      <Pane layoutX="365.0" layoutY="54.0" prefHeight="74.0" prefWidth="147.0" style="-fx-border-color: black;">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Total Tickets" />
-            <Label layoutX="14.0" layoutY="37.0" text="TAL" />
-         </children>
-      </Pane>
-      <Button layoutX="535.0" layoutY="14.0" mnemonicParsing="false" text="Logout" />
-      <Label layoutX="23.0" layoutY="18.0" text="Coordinator Dashboard" />
-      <Label layoutX="45.0" layoutY="136.0" text="User Management" />
-   </children>
-</AnchorPane>
+      </VBox>
+   </center>
+</BorderPane>
