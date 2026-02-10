@@ -1,0 +1,6 @@
+.logo-circle {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 70;
+    -fx-background-radius: 70;
+}
