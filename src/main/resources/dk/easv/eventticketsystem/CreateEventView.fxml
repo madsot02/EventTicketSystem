@@ -7,35 +7,27 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="650.0" prefWidth="560.0" stylesheets="@../../../../../../../EventTicketGui/src/main/resources/dk/easv/ticketgui/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.CreateEventController">
+<BorderPane prefHeight="519.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.CreateEventController">
    <top>
       <HBox alignment="CENTER_LEFT">
          <padding>
-            <Insets bottom="20" left="25" right="25" top="20" />
+            <Insets bottom="20.0" left="45.0" right="25.0" top="20.0" />
          </padding>
          <children>
             <Label text="Create New Event" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="closeButton" onAction="#handleClose">
-               <graphic>
-                  <SVGPath content="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-               </graphic>
-            </Button>
          </children>
       </HBox>
    </top>
    <center>
-      <VBox spacing="20" >
+      <VBox prefWidth="562.0" spacing="20">
          <padding>
             <Insets bottom="20" left="25" right="25" top="10" />
          </padding>
          <children>
-            <VBox spacing="15" >
+            <VBox spacing="15">
                <padding>
                   <Insets bottom="20" left="20" right="20" top="20" />
                </padding>
@@ -114,9 +106,9 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" spacing="15">
+      <HBox alignment="CENTER_RIGHT" prefWidth="562.0" spacing="15">
          <padding>
-            <Insets bottom="25" left="25" right="25" top="20" />
+            <Insets bottom="25.0" left="25.0" right="45.0" top="20.0" />
          </padding>
          <children>
             <Button mnemonicParsing="false" text="Create Event" />
