@@ -23,3 +23,68 @@
 .logout-icon {
     -fx-fill: #ff3b30;
 }
+.add-user-button {
+    -fx-background-color: #5B4CFF;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(91, 76, 255, 0.3), 10, 0, 0, 3);
+    -fx-font-weight: bold;
+}
+
+.add-user-button:hover {
+    -fx-background-color: #4a3de6;
+}
+
+.add-user-button:pressed {
+    -fx-background-color: #3d32cc;
+}
+
+.action-button-remove {
+    -fx-background-color: transparent;
+    -fx-text-fill: #d97706;
+    -fx-cursor: hand;
+    -fx-padding: 6 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-border-color: transparent;
+}
+
+.create-event-button {
+    -fx-background-color: #5B4CFF;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(91, 76, 255, 0.3), 10, 0, 0, 3);
+    -fx-font-weight: bold;
+}
+
+.create-event-button:hover {
+    -fx-background-color: #4a3de6;
+}
+
+.create-event-button:pressed {
+    -fx-background-color: #3d32cc;
+}
+.button-icon-white {
+    -fx-fill: white;
+}
+
+.cancel-button {
+    -fx-background-color: #f5f5f7;
+    -fx-text-fill: #1d1d1f;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 12 24;
+    -fx-font-weight: 500;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #e5e5ea;
+}
+
+.cancel-button:pressed {
+    -fx-background-color: #d1d1d6;
+}

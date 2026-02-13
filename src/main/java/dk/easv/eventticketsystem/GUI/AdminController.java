@@ -38,4 +38,8 @@ public class AdminController {
     @FXML
     private void handleAddUser(ActionEvent actionEvent) {
     }
+
+    @FXML
+    private void handleRemoveCoordinator(ActionEvent actionEvent) {
+    }
 }

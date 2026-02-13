@@ -22,6 +22,9 @@
                      <HBox.margin>
                         <Insets left="15.0" top="25.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="21.0" />
+                     </font>
                   </Label>
                   <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleLogout" prefHeight="38.0" prefWidth="131.0" stylesheets="@style.css" text="Logout">
                      <HBox.margin>
@@ -76,18 +79,27 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="345.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="160.0" text="User Management">
+                  <Label prefHeight="26.0" prefWidth="215.0" text="User Management">
                      <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="5.0" />
                      </HBox.margin>
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <padding>
+                        <Insets right="-100.0" />
+                     </padding>
                   </Label>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAddUser" prefHeight="26.0" prefWidth="70.0" text="Add User">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleAddUser" prefHeight="42.0" prefWidth="247.0" styleClass="add-user-button" stylesheets="@style.css" text="Add User">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <graphic>
+                        <SVGPath content="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" styleClass="button-icon-white" />
+                     </graphic>
+                     <padding>
+                        <Insets right="120.0" />
+                     </padding>
                   </Button>
                </children>
                <VBox.margin>
@@ -113,7 +125,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleRemovCoordinator" text="Remove Coordinator" HBox.hgrow="NEVER">
+                  <Button mnemonicParsing="false" onAction="#handleRemoveCoordinator" styleClass="action-button-remove" stylesheets="@style.css" text="Remove Coordinator" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
