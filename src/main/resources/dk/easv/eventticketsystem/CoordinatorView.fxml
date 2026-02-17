@@ -16,17 +16,17 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="600.0" spacing="390.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="600.0" spacing="410.0">
                <children>
-                  <Label text="Coordinator Dashboard" HBox.hgrow="NEVER">
+                  <Label styleClass="title-text" stylesheets="@style.css" text="Coordinator Dashboard" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets left="15.0" top="25.0" />
                      </HBox.margin>
                      <font>
-                        <Font size="18.0" />
+                        <Font size="21.0" />
                      </font>
                      <padding>
-                        <Insets right="-150.0" />
+                        <Insets right="-200.0" />
                      </padding>
                   </Label>
                   <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleLogout" prefHeight="38.0" prefWidth="138.0" stylesheets="@style.css" text="Logout">
@@ -45,10 +45,10 @@
             </HBox>
             <HBox prefHeight="116.0" prefWidth="600.0" spacing="5.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="220.0" spacing="8.0" style="-fx-border-color: black;">
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="220.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
                      <children>
                         <Label text="Total Events" />
-                        <Label text="TAL" />
+                        <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -57,19 +57,19 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="226.0" spacing="8.0" style="-fx-border-color: black;">
+                  <VBox prefHeight="100.0" prefWidth="226.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
                      <children>
                         <Label text="Upcoming Events" />
-                        <Label text="TAL" />
+                        <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="194.0" spacing="8.0" style="-fx-border-color: black;">
+                  <VBox prefHeight="100.0" prefWidth="194.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
                      <children>
                         <Label text="Total Tickets" />
-                        <Label text="TAL" />
+                        <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -82,7 +82,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="385.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="107.0" text="My Events">
+                  <Label prefHeight="26.0" prefWidth="107.0" styleClass="title-text" stylesheets="@style.css" text="My Events">
                      <HBox.margin>
                         <Insets top="20.0" />
                      </HBox.margin>
@@ -95,7 +95,7 @@
                   </Label>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="42.0" prefWidth="199.0" stylesheets="@style.css" text="Create Event">
                      <HBox.margin>
-                        <Insets />
+                        <Insets bottom="10.0" />
                      </HBox.margin>
                      <graphic>
                         <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
@@ -136,6 +136,9 @@
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
                   </Button>
                </children>
                <padding>

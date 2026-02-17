@@ -12,7 +12,8 @@
     -fx-border-color: transparent;
     -fx-padding: 8 15;
     -fx-font-size: 14px;
-    -fx-font-weight: 600;
+    -fx-font-weight: bold;
+
 }
 
 .logout-button:hover {
@@ -23,6 +24,7 @@
 .logout-icon {
     -fx-fill: #ff3b30;
 }
+
 .add-user-button {
     -fx-background-color: #5B4CFF;
     -fx-text-fill: white;
@@ -45,7 +47,6 @@
     -fx-background-color: transparent;
     -fx-text-fill: #d97706;
     -fx-cursor: hand;
-    -fx-padding: 6 12;
     -fx-font-size: 13px;
     -fx-font-weight: 600;
     -fx-border-color: transparent;
@@ -87,4 +88,16 @@
 
 .cancel-button:pressed {
     -fx-background-color: #d1d1d6;
+}
+
+.title-text{
+    -fx-font-weight: bold;
+}
+
+.numbers-text{
+    -fx-font-style: italic;
+}
+
+.border-rounded{
+
 }
