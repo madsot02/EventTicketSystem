@@ -24,7 +24,7 @@ public class AdminController {
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
 
-        stage.setTitle("Admin View");
+        stage.setTitle("Create User View");
         stage.setScene(scene);
 
         stage.initModality(Modality.APPLICATION_MODAL);

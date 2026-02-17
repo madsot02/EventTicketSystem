@@ -32,7 +32,7 @@ public class CreateUserController {
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
 
-        stage.setTitle("Create User View");
+        stage.setTitle("Admin View");
         stage.setScene(scene);
 
         stage.initModality(Modality.APPLICATION_MODAL);
