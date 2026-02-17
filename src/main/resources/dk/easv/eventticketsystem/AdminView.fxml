@@ -42,7 +42,7 @@
             </HBox>
             <HBox prefHeight="116.0" prefWidth="600.0" spacing="5.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="220.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="220.0" spacing="8.0" styleClass="border-rounded" stylesheets="@style.css">
                      <children>
                         <Label text="Total Users" />
                         <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
@@ -54,7 +54,7 @@
                         <Insets />
                      </opaqueInsets>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="226.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
+                  <VBox prefHeight="100.0" prefWidth="226.0" spacing="8.0" styleClass="border-rounded" stylesheets="@style.css">
                      <children>
                         <Label text="Coordinators" />
                         <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
@@ -63,7 +63,7 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <VBox prefHeight="100.0" prefWidth="194.0" spacing="8.0" styleClass="logo-circle" stylesheets="@style.css">
+                  <VBox prefHeight="100.0" prefWidth="194.0" spacing="8.0" styleClass="border-rounded" stylesheets="@style.css">
                      <children>
                         <Label text="Staff Users" />
                         <Label styleClass="numbers-text" stylesheets="@style.css" text="TAL" />
