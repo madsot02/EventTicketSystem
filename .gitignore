@@ -38,5 +38,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-config/config.properties
-EventTicketSystem\config\config.properties
+.config/config.properties/
