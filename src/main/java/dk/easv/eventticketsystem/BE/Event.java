@@ -23,63 +23,67 @@ public class Event {
         this.time = time;
     }
 
-    private int getId() {
+    public int getId() {
         return id;
     }
 
-    private String getName() {
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    private String getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    private void setLocation(String location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    private int getCreatedBy() {
+    public int getCreatedBy() {
         return createdBy;
     }
 
-    private void setCreatedBy(int createdBy) {
+    public void setCreatedBy(int createdBy) {
         this.createdBy = createdBy;
     }
 
-    private int getTicketsAvailable() {
+    public int getTicketsAvailable() {
         return ticketsAvailable;
     }
 
-    private void setTicketsAvailable(int ticketsAvailable) {
+    public void setTicketsAvailable(int ticketsAvailable) {
         this.ticketsAvailable = ticketsAvailable;
     }
 
-    private LocalDate getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    private void setDate(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    private int getTime() {
+    public int getTime() {
         return time;
     }
 
-    private void setTime(int time) {
+    public void setTime(int time) {
         this.time = time;
     }
 }
