@@ -39,3 +39,4 @@ build/
 .DS_Store
 
 config/config.properties
+EventTicketSystem\config\config.properties
