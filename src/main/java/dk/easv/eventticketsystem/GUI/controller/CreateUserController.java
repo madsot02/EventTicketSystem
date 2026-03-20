@@ -1,4 +1,4 @@
-package dk.easv.eventticketsystem.GUI;
+package dk.easv.eventticketsystem.GUI.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
