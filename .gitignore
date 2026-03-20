@@ -38,4 +38,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.config/config.properties/
+config.properties
+config/config.properties
