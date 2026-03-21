@@ -20,6 +20,15 @@ public class AdminController {
 
     @FXML
     private void handleAddUserAdmin(ActionEvent actionEvent) throws IOException {
+
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void handleAddUser(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateUserView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
@@ -29,14 +38,6 @@ public class AdminController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-    }
-
-    @FXML
-    private void handleLogout(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void handleAddUser(ActionEvent actionEvent) {
     }
 
     @FXML
