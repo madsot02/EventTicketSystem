@@ -13,9 +13,9 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="519.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.CreateEventController">
+<BorderPane prefHeight="646.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.CreateEventController">
    <top>
-      <HBox alignment="BOTTOM_LEFT">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="71.0" prefWidth="562.0">
          <padding>
             <Insets left="45.0" top="20.0" />
          </padding>
@@ -28,17 +28,16 @@
       </HBox>
    </top>
    <center>
-      <VBox alignment="CENTER" maxHeight="350.0" prefHeight="377.0" prefWidth="562.0" spacing="20.0">
+      <VBox alignment="CENTER" maxHeight="505.0" prefHeight="505.0" prefWidth="562.0" spacing="20.0">
          <padding>
             <Insets left="25.0" right="25.0" />
          </padding>
          <children>
-            <VBox prefHeight="369.0" prefWidth="511.0" spacing="15">
+            <VBox prefHeight="396.0" prefWidth="512.0" spacing="15">
                <padding>
                   <Insets left="20.0" right="20.0" />
                </padding>
                <children>
-                  <HBox alignment="CENTER_LEFT" spacing="8" />
                   <VBox spacing="6">
                      <children>
                         <Label text="Event Name">
@@ -53,22 +52,46 @@
                      <children>
                         <VBox spacing="6" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Date">
+                              <Label text="StartDate">
                                  <font>
                                     <Font size="13" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="txtDate" prefHeight="25.0" prefWidth="253.0" promptText="Select Date" />
+                              <DatePicker fx:id="txtStartDate" prefHeight="25.0" prefWidth="268.0" promptText="Select Date" />
                            </children>
                         </VBox>
                         <VBox spacing="6" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Time">
+                              <Label text="StartTime">
                                  <font>
                                     <Font size="13" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="cBoxTimeSelect" prefHeight="25.0" prefWidth="204.0" promptText="Select Time" />
+                              <ComboBox fx:id="cBoxTimeSelectStart" prefHeight="25.0" prefWidth="204.0" promptText="Select Time" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox spacing="15">
+                     <children>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="EndDate">
+                                 <font>
+                                    <Font size="13" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="txtEndDate" prefHeight="25.0" prefWidth="268.0" promptText="Select Date" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="EndTime">
+                                 <font>
+                                    <Font size="13" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cBoxTimeSelectEnd" prefHeight="25.0" prefWidth="204.0" promptText="Select Time" />
                            </children>
                         </VBox>
                      </children>
@@ -90,7 +113,7 @@
                               <Font size="13" />
                            </font>
                         </Label>
-                        <TextArea fx:id="txtAreaDescription" prefHeight="101.0" prefRowCount="4" prefWidth="471.0" promptText="Important Notes or Instructions" wrapText="true" />
+                        <TextArea fx:id="txtAreaDescription" prefHeight="149.0" prefRowCount="4" prefWidth="472.0" promptText="Important Notes or Instructions" wrapText="true" />
                      </children>
                   </VBox>
                </children>
@@ -99,12 +122,12 @@
       </VBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="83.0" prefWidth="562.0" spacing="15.0">
+      <HBox alignment="CENTER_RIGHT" prefHeight="72.0" prefWidth="562.0" spacing="15.0">
          <padding>
             <Insets bottom="25.0" left="25.0" right="45.0" />
          </padding>
          <children>
-            <Button mnemonicParsing="false" onAction="#handleCreateEvent" styleClass="add-user-button" stylesheets="@style.css" text="Create Event">
+            <Button fx:id="createOrEventBtn" mnemonicParsing="false" onAction="#handleCreateEvent" styleClass="add-user-button" stylesheets="@style.css" text="Create Event">
              <graphic>
                  <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
              </graphic></Button>

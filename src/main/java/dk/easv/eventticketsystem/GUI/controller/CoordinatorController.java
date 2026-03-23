@@ -49,4 +49,12 @@ public class CoordinatorController {
     private void handleLogout(ActionEvent actionEvent) {
 
     }
+
+    @FXML
+    private void handleCreateTiicket(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void handleEditEvent(ActionEvent actionEvent) {
+    }
 }

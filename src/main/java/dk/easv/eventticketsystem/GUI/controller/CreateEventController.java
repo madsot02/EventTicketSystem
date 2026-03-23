@@ -2,10 +2,7 @@ package dk.easv.eventticketsystem.GUI.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 
@@ -20,6 +17,16 @@ public class CreateEventController {
     private TextField txtLocation;
     @FXML
     private TextArea txtAreaDescription;
+    @FXML
+    private Button createOrEventBtn;
+    @FXML
+    private ComboBox cBoxTimeSelectEnd;
+    @FXML
+    private DatePicker txtEndDate;
+    @FXML
+    private ComboBox cBoxTimeSelectStart;
+    @FXML
+    private DatePicker txtStartDate;
 
 
     @FXML

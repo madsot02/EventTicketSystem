@@ -16,7 +16,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="95.0" prefWidth="600.0" spacing="410.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="118.0" prefWidth="643.0" spacing="410.0">
                <children>
                   <Label styleClass="title-text" stylesheets="@style.css" text="Coordinator Dashboard" HBox.hgrow="NEVER">
                      <HBox.margin>
@@ -80,37 +80,74 @@
                   <Insets bottom="10.0" left="15.0" right="15.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="385.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="107.0" styleClass="title-text" stylesheets="@style.css" text="My Events">
-                     <HBox.margin>
-                        <Insets top="20.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="17.0" />
-                     </font>
+                  <VBox prefHeight="46.0" prefWidth="138.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="107.0" styleClass="title-text" stylesheets="@style.css" text="My Events">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <padding>
+                              <Insets right="-150.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="46.0" prefWidth="158.0">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateTiicket" prefHeight="41.0" prefWidth="179.0" stylesheets="@style.css" text="Create Ticket">
+                           <graphic>
+                              <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="create-event-button" />
+                              <String fx:value="button-icon-white" />
+                           </styleClass>
+                        </Button>
+                     </children>
                      <padding>
-                        <Insets right="-150.0" />
+                        <Insets bottom="5.0" right="5.0" />
                      </padding>
-                  </Label>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="42.0" prefWidth="199.0" stylesheets="@style.css" text="Create Event">
-                     <HBox.margin>
-                        <Insets bottom="10.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
-                     </graphic>
-                     <styleClass>
-                        <String fx:value="create-event-button" />
-                        <String fx:value="button-icon-white" />
-                     </styleClass>
-                  </Button>
+                  </VBox>
+                  <VBox prefHeight="46.0" prefWidth="146.0">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleEditEvent" prefHeight="41.0" prefWidth="149.0" stylesheets="@style.css" text="Edit Event">
+                           <graphic>
+                              <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="create-event-button" />
+                              <String fx:value="button-icon-white" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="41.0" prefWidth="159.0">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateEvent" prefHeight="41.0" prefWidth="161.0" stylesheets="@style.css" text="Create Event">
+                           <graphic>
+                              <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="create-event-button" />
+                              <String fx:value="button-icon-white" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" />
+                     </padding>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <padding>
-                  <Insets left="15.0" right="15.0" />
+                  <Insets bottom="15.0" left="15.0" right="15.0" />
                </padding>
             </HBox>
             <HBox prefHeight="243.0" prefWidth="600.0">
