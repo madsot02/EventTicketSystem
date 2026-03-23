@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAO_DB implements IEventDataAccess {
@@ -23,13 +26,13 @@ public class EventDAO_DB implements IEventDataAccess {
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, newEvent.getName());
-            stmt.setString(2, newEvent.getDescription());
-            stmt.setString(3, newEvent.getLocation());
-            stmt.setInt(4, newEvent.getTicketsAvailable());
-            stmt.setDate(5, java.sql.Date.valueOf(newEvent.getStartDate()));
-            stmt.setDate(6, java.sql.Date.valueOf(newEvent.getEndDate()));
-            stmt.setString(7, newEvent.getStartTime());
-            stmt.setString(8, newEvent.getEndTime());
+            stmt.setString(2, newEvent.getLocation());
+            stmt.setString(3, newEvent.getDescription());
+            stmt.setDate(4, java.sql.Date.valueOf(newEvent.getStartDate()));
+            stmt.setDate(5, java.sql.Date.valueOf(newEvent.getEndDate()));
+            stmt.setString(6, newEvent.getStartTime());
+            stmt.setString(7, newEvent.getEndTime());
+            stmt.setInt(8, newEvent.getTicketsAvailable());
 
             stmt.executeUpdate();
 
@@ -47,7 +50,32 @@ public class EventDAO_DB implements IEventDataAccess {
     }
     @Override
     public List<Event> getAllEvents() throws Exception {
-        return List.of();
+        List<Event> allEvents = new ArrayList<>();
+
+        try(Connection conn = databaseConnector.getConnection();
+            Statement stmt = conn.createStatement()) {
+            String sql = "SELECT * FROM dbo.Events;";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Event event = new Event(
+                rs.getInt("eventId"),
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getString("location"),
+                rs.getInt("ticketsAvailable"),
+                rs.getDate("startDate").toLocalDate(),
+                rs.getDate("endDate").toLocalDate(),
+                rs.getString("startTime"),
+                rs.getString("endTime"));
+
+                allEvents.add(event);
+            }
+            return allEvents;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get movies", ex);
+        }
     }
 
     @Override

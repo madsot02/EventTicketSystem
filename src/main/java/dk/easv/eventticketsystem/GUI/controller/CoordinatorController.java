@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -19,20 +21,35 @@ public class CoordinatorController {
     @FXML
     private TableColumn colName;
     @FXML
-    private TableColumn colPlace;
-    @FXML
-    private TableColumn colDate;
-    @FXML
-    private TableColumn colTime;
-    @FXML
     private TableColumn colTotalTickets;
-    @FXML
-    private TableColumn colDescription;
 
     private EventModel eventModel;
+    @FXML
+    private TableColumn colLocation;
+    @FXML
+    private TableColumn colStartDate;
+    @FXML
+    private TableColumn colEndDate;
+    @FXML
+    private TableColumn colStartTime;
+    @FXML
+    private TableColumn colEndTime;
+    @FXML
+    private TextArea txtAreaDescriptionMain;
 
     // ✅ FIX: initialize EventModel
-    public void initialize() {
+    public void initialize() throws Exception {
+    colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+    colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+    colEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+    colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+    colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+    colTotalTickets.setCellValueFactory(new PropertyValueFactory<>("totalTickets"));
+
+    eventModel = new EventModel();
+    tblEvents.setItems(eventModel.getObservableEvents());
+
         try {
             eventModel = new EventModel();
         } catch (Exception e) {
@@ -70,7 +87,7 @@ public class CoordinatorController {
     }
 
     @FXML
-    private void handleCreateTiicket(ActionEvent actionEvent) {
+    private void handleCreateTicket(ActionEvent actionEvent) {
     }
 
     @FXML
