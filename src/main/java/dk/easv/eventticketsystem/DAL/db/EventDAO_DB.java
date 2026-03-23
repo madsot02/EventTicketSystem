@@ -17,7 +17,7 @@ public class EventDAO_DB implements IEventDataAccess {
 
     @Override
     public Event createEvent(Event newEvent) throws Exception {
-        String sql = "INSERT INTO dbo.Event (name, description, location, createdBy, ticketsAvailable, date, time) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO dbo.Event (name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -25,10 +25,11 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setString(1, newEvent.getName());
             stmt.setString(2, newEvent.getDescription());
             stmt.setString(3, newEvent.getLocation());
-            stmt.setInt(4, newEvent.getCreatedBy());
-            stmt.setInt(5, newEvent.getTicketsAvailable());
-            stmt.setDate(6, java.sql.Date.valueOf(newEvent.getDate()));
-            stmt.setInt(6, newEvent.getTime());
+            stmt.setInt(4, newEvent.getTicketsAvailable());
+            stmt.setDate(5, java.sql.Date.valueOf(newEvent.getStartDate()));
+            stmt.setDate(6, java.sql.Date.valueOf(newEvent.getEndDate()));
+            stmt.setString(7, newEvent.getStartTime());
+            stmt.setString(8, newEvent.getEndTime());
 
             stmt.executeUpdate();
 

@@ -1,5 +1,7 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+import dk.easv.eventticketsystem.BLL.EventManager;
+import dk.easv.eventticketsystem.GUI.model.EventModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,14 +30,22 @@ public class CoordinatorController {
     @FXML
     private TableColumn colDescription;
 
+    private EventModel eventModel;
+
+    public void setModel(EventModel eventModel){
+        this.eventModel = eventModel;
+    }
     @FXML
     private void handleCreateEvent(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateEventView.fxml"));
-        Scene scene = new Scene(loader.load());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateEventView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
 
         stage.setTitle("Create User View");
         stage.setScene(scene);
+
+        CreateEventController eventController = fxmlLoader.getController();
+        eventController.setEventModel(eventModel);
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();

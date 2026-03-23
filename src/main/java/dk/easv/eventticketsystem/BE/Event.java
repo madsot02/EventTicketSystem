@@ -7,20 +7,22 @@ public class Event {
     private String name;
     private String description;
     private String location;
-    private int createdBy;
     private int ticketsAvailable;
-    private LocalDate date;
-    private int time;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String startTime;
+    private String endTime;
 
-    public Event(int id, String name, String description, String location, int createdBy, int ticketsAvailable, LocalDate date, int time){
+    public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime){
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
-        this.createdBy = createdBy;
         this.ticketsAvailable = ticketsAvailable;
-        this.date = date;
-        this.time = time;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public int getId() {
@@ -55,14 +57,6 @@ public class Event {
         this.location = location;
     }
 
-    public int getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public int getTicketsAvailable() {
         return ticketsAvailable;
     }
@@ -71,19 +65,35 @@ public class Event {
         this.ticketsAvailable = ticketsAvailable;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public int getTime() {
-        return time;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }
