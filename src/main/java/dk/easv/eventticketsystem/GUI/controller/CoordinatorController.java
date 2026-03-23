@@ -45,7 +45,7 @@ public class CoordinatorController {
     colEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
     colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
     colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-    colTotalTickets.setCellValueFactory(new PropertyValueFactory<>("totalTickets"));
+    colTotalTickets.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
 
     eventModel = new EventModel();
     tblEvents.setItems(eventModel.getObservableEvents());
@@ -56,6 +56,8 @@ public class CoordinatorController {
             e.printStackTrace();
         }
     }
+
+
 
     public void setModel(EventModel eventModel){
         this.eventModel = eventModel;
