@@ -99,6 +99,7 @@ public class CreateEventController {
         String description = txtAreaDescription.getText().trim();
         String ticketsText = txtTicketsAvailable.getText().trim();
 
+
         if (name.isEmpty() || startDate == null || endDate == null || location.isEmpty() || startTime == null || endTime == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Missing Fields");
@@ -134,11 +135,12 @@ public class CreateEventController {
                 editingEvent.setLocation(location);
                 editingEvent.setDescription(description);
                 editingEvent.setTicketsAvailable(ticketsAvailable);
+                editingEvent.setIsDeleted(false);
 
                 eventModel.updateEvent(editingEvent);
 
             } else {
-                Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime);
+                Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, false);
                 eventModel.createEvent(newEvent);
             }
 

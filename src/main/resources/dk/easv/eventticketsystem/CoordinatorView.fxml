@@ -155,6 +155,13 @@
                <children>
                   <VBox prefHeight="241.0" prefWidth="829.0">
                      <children>
+                        <HBox prefHeight="26.0" prefWidth="815.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleActiveTableView" prefHeight="25.0" prefWidth="79.0" text="Active" />
+                              <Button mnemonicParsing="false" onAction="#handleArchivedTableView" prefHeight="25.0" prefWidth="71.0" text="Archived" />
+                              <Button mnemonicParsing="false" onAction="#handleDeletedTableView" prefHeight="25.0" prefWidth="75.0" text="Deleted" />
+                           </children>
+                        </HBox>
                         <TableView fx:id="tblEvents" prefHeight="231.0" prefWidth="650.0">
                            <columns>
                               <TableColumn fx:id="colName" prefWidth="171.0" text="Name" />
@@ -163,7 +170,7 @@
                               <TableColumn fx:id="colEndDate" prefWidth="53.0" text="EndDate" />
                               <TableColumn fx:id="colStartTime" prefWidth="63.0" text="StartTime" />
                               <TableColumn fx:id="colEndTime" prefWidth="58.0" text="EndTime" />
-                              <TableColumn fx:id="colTotalTickets" minWidth="8.0" prefWidth="90.0" text="Total Tickets" />
+                              <TableColumn fx:id="colTicketsAvailable" minWidth="8.0" prefWidth="90.0" text="Total Tickets" />
                            </columns>
                         </TableView>
                      </children>

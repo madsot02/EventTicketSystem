@@ -12,8 +12,9 @@ public class Event {
     private LocalDate endDate;
     private String startTime;
     private String endTime;
+    private boolean isDeleted;
 
-    public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime){
+    public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime, boolean isDeleted){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,6 +24,7 @@ public class Event {
         this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isDeleted = isDeleted;
     }
 
     public int getId() {
@@ -95,5 +97,16 @@ public class Event {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public boolean getIsDeleted(){return isDeleted;}
+
+    public void setIsDeleted(boolean isDeleted){this.isDeleted = isDeleted;}
+
+    public boolean isActive(){
+        return !isDeleted && endDate != null && !endDate.isBefore(LocalDate.now());
+    }
+    public boolean isArchived() {
+        return !isDeleted && endDate != null && endDate.isBefore(LocalDate.now());
     }
 }

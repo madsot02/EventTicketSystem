@@ -1,43 +1,48 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
+import dk.easv.eventticketsystem.GUI.utils.TableViewSwitcher;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class CoordinatorController {
 
     @FXML
-    private TableView tblEvents;
+    private TableView<Event> tblEvents;
     @FXML
-    private TableColumn colName;
+    private TableColumn<Event, String> colName;
     @FXML
-    private TableColumn colTotalTickets;
-
-    private EventModel eventModel;
+    private TableColumn<Event, Integer> colTicketsAvailable;
     @FXML
-    private TableColumn colLocation;
+    private TableColumn<Event, String> colLocation;
     @FXML
-    private TableColumn colStartDate;
+    private TableColumn<Event, LocalDate> colStartDate;
     @FXML
-    private TableColumn colEndDate;
+    private TableColumn<Event, LocalDate> colEndDate;
     @FXML
-    private TableColumn colStartTime;
+    private TableColumn<Event, String> colStartTime;
     @FXML
-    private TableColumn colEndTime;
+    private TableColumn<Event, String> colEndTime;
     @FXML
     private TextArea txtAreaDescriptionMain;
 
-    // ✅ FIX: initialize EventModel
+    private EventModel eventModel;
+
+    private TableViewSwitcher status;
+
+    private FilteredList<Event> filteredEvents;
+
     public void initialize() throws Exception {
     colName.setCellValueFactory(new PropertyValueFactory<>("name"));
     colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -45,13 +50,16 @@ public class CoordinatorController {
     colEndDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
     colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
     colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-    colTotalTickets.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
+    colTicketsAvailable.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
 
-    eventModel = new EventModel();
-    tblEvents.setItems(eventModel.getObservableEvents());
+
 
         try {
             eventModel = new EventModel();
+            filteredEvents = new FilteredList<>(eventModel.getObservableEvents());
+            filteredEvents.setPredicate(Event::isActive);
+
+            tblEvents.setItems(filteredEvents);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,8 +79,7 @@ public class CoordinatorController {
 
         stage.setTitle("Create Event");
         stage.setScene(scene);
-
-        // ✅ This now works because eventModel is NOT null anymore
+        
         CreateEventController eventController = fxmlLoader.getController();
         eventController.setEventModel(eventModel);
 
@@ -82,6 +89,33 @@ public class CoordinatorController {
 
     @FXML
     private void handleRemoveEvent(ActionEvent actionEvent) {
+        Event selectedEvent = tblEvents.getSelectionModel().getSelectedItem();
+
+        if(selectedEvent == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Event Selected");
+            alert.setHeaderText("Please select an event to delete");
+            alert.showAndWait();
+            return;
+        }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Delete");
+        confirm.setHeaderText("Are you sure you want to delete this event");
+        confirm.setContentText(selectedEvent.getName());
+        if(confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK){
+            return;
+        }
+        try{
+            eventModel.deleteEvent(selectedEvent);
+            filteredEvents.setPredicate(filteredEvents.getPredicate());
+
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Error");
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -94,5 +128,20 @@ public class CoordinatorController {
 
     @FXML
     private void handleEditEvent(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void handleActiveTableView(ActionEvent actionEvent) {
+        filteredEvents.setPredicate(Event::isActive);
+    }
+
+    @FXML
+    private void handleArchivedTableView(ActionEvent actionEvent) {
+        filteredEvents.setPredicate(Event::isArchived);
+    }
+
+    @FXML
+    private void handleDeletedTableView(ActionEvent actionEvent) {
+        filteredEvents.setPredicate(Event::getIsDeleted);
     }
 }

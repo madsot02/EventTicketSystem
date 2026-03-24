@@ -28,11 +28,11 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setString(1, newEvent.getName());
             stmt.setString(2, newEvent.getLocation());
             stmt.setString(3, newEvent.getDescription());
-            stmt.setDate(4, java.sql.Date.valueOf(newEvent.getStartDate()));
-            stmt.setDate(5, java.sql.Date.valueOf(newEvent.getEndDate()));
-            stmt.setString(6, newEvent.getStartTime());
-            stmt.setString(7, newEvent.getEndTime());
-            stmt.setInt(8, newEvent.getTicketsAvailable());
+            stmt.setInt(4, newEvent.getTicketsAvailable());
+            stmt.setDate(5, java.sql.Date.valueOf(newEvent.getStartDate()));
+            stmt.setDate(6, java.sql.Date.valueOf(newEvent.getEndDate()));
+            stmt.setString(7, newEvent.getStartTime());
+            stmt.setString(8, newEvent.getEndTime());
 
             stmt.executeUpdate();
 
@@ -67,7 +67,8 @@ public class EventDAO_DB implements IEventDataAccess {
                 rs.getDate("startDate").toLocalDate(),
                 rs.getDate("endDate").toLocalDate(),
                 rs.getString("startTime"),
-                rs.getString("endTime"));
+                rs.getString("endTime"),
+                rs.getBoolean("isDeleted"));
 
                 allEvents.add(event);
             }
@@ -85,6 +86,15 @@ public class EventDAO_DB implements IEventDataAccess {
 
     @Override
     public void deleteEvent(int eventId) throws Exception {
+        String sql = "UPDATE dbo.Events SET isDeleted = 1 WHERE eventId = ?";
 
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not delete event", ex);
+        }
     }
 }
