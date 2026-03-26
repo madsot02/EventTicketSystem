@@ -127,7 +127,23 @@ public class CoordinatorController {
     }
 
     @FXML
-    private void handleEditEvent(ActionEvent actionEvent) {
+    private void handleEditEvent(ActionEvent actionEvent) throws IOException {
+        Event selectedEvent = tblEvents.getSelectionModel().getSelectedItem();
+        if (selectedEvent == null) return;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateEventView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+
+        stage.setTitle("Edit Event");
+        stage.setScene(scene);
+
+        CreateEventController controller = loader.getController();
+        controller.setEventModel(eventModel);
+        controller.setEditingEvent(selectedEvent);
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML

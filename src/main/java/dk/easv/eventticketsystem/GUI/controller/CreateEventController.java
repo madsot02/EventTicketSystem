@@ -19,7 +19,7 @@ public class CreateEventController {
     @FXML
     private TextArea txtAreaDescription;
     @FXML
-    private Button createOrEventBtn;
+    private Button editBtn;
     @FXML
     private ComboBox<String> cBoxTimeSelectEnd;
     @FXML
@@ -76,8 +76,11 @@ public class CreateEventController {
             txtEndDate.setValue(event.getEndDate());
             txtLocation.setText(event.getLocation());
             txtAreaDescription.setText(event.getDescription());
+            txtTicketsAvailable.setText(String.valueOf(event.getTicketsAvailable()));
             cBoxTimeSelectStart.setValue(event.getStartTime());
             cBoxTimeSelectEnd.setValue(event.getEndTime());
+
+            editBtn.setText("Edit Event");
         }
     }
 

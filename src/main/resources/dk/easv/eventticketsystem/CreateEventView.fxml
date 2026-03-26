@@ -144,7 +144,7 @@
             <Insets bottom="25.0" left="25.0" right="45.0" />
          </padding>
          <children>
-            <Button fx:id="createOrEventBtn" mnemonicParsing="false" onAction="#handleCreateEvent" styleClass="add-user-button" stylesheets="@style.css" text="Create Event">
+            <Button fx:id="editBtn" mnemonicParsing="false" onAction="#handleCreateEvent" styleClass="add-user-button" stylesheets="@style.css" text="Create Event">
              <graphic>
                  <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="button-icon-white" />
              </graphic></Button>
