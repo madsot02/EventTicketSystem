@@ -36,7 +36,22 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+
+      <dependency>
+          <groupId>com.microsoft.sqlserver</groupId>
+          <artifactId>mssql-jdbc</artifactId>
+          <version>12.8.2.jre11</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>at.favre.lib</groupId>
+          <artifactId>bcrypt</artifactId>
+          <version>0.10.2</version>
+      </dependency>
+
+  </dependencies>
 
   <build>
     <plugins>
