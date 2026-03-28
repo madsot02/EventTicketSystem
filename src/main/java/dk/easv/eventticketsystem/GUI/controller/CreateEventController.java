@@ -104,6 +104,13 @@ public class CreateEventController {
             alert.showAndWait();
             return;
         }
+        if (startDate.equals(endDate) && endTime.compareTo(startTime) <= 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Time");
+            alert.setHeaderText("End time cannot be before or equal to start time on the same day");
+            alert.showAndWait();
+            return;
+        }
 
         int ticketsAvailable;
         try {
