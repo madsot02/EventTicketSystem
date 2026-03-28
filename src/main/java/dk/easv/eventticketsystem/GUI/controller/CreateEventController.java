@@ -132,7 +132,7 @@ public class CreateEventController {
                 editingEvent.setLocation(location);
                 editingEvent.setDescription(description);
                 editingEvent.setTicketsAvailable(ticketsAvailable);
-                editingEvent.setIsDeleted(false);
+                //editingEvent.setIsDeleted(false);
 
                 eventModel.updateEvent(editingEvent);
 

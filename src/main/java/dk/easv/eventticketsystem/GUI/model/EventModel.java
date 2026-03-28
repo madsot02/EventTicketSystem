@@ -36,8 +36,10 @@ public class EventModel{
         }
     }
 
-        public void deleteEvent(Event selectedEvent) throws Exception{
-            eventManager.deleteEvent(selectedEvent);
-            events.remove(selectedEvent);
-        }
+    public void deleteEvent(Event selectedEvent) throws Exception {
+        eventManager.deleteEvent(selectedEvent);
+        selectedEvent.setIsDeleted(true);
+        events.remove(selectedEvent);
+        events.add(selectedEvent);
+    }
 }

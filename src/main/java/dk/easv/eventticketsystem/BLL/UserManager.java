@@ -6,7 +6,7 @@ import dk.easv.eventticketsystem.DAL.db.UserDAO_DB;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
 
 import java.util.List;
-
+/*
 public class UserManager {
     private final IUserDataAccess userDataAccess;
 
@@ -44,3 +44,5 @@ public class UserManager {
         return user;
     }
 }
+
+ */

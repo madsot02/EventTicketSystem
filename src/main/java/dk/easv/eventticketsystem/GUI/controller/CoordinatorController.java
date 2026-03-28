@@ -107,7 +107,7 @@ public class CoordinatorController {
         }
         try{
             eventModel.deleteEvent(selectedEvent);
-            filteredEvents.setPredicate(filteredEvents.getPredicate());
+            //filteredEvents.setPredicate(filteredEvents.getPredicate());
 
         } catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -108,8 +108,8 @@ public class EventDAO_DB implements IEventDataAccess {
 
     private void statementHelper(Event newEvent, PreparedStatement stmt) throws SQLException {
         stmt.setString(1, newEvent.getName());
-        stmt.setString(2, newEvent.getLocation());
-        stmt.setString(3, newEvent.getDescription());
+        stmt.setString(2, newEvent.getDescription());
+        stmt.setString(3, newEvent.getLocation());
         stmt.setInt(4, newEvent.getTicketsAvailable());
         stmt.setDate(5, Date.valueOf(newEvent.getStartDate()));
         stmt.setDate(6, Date.valueOf(newEvent.getEndDate()));
