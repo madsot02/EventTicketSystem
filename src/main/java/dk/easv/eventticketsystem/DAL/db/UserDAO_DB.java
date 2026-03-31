@@ -1,5 +1,6 @@
 package dk.easv.eventticketsystem.DAL.db;
 
+import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
@@ -76,8 +78,29 @@ public class UserDAO_DB implements IUserDataAccess {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return List.of();
+    public List<User> getAllUsers() throws Exception {
+        List<User> allUsers = new ArrayList<>();
+
+        try(Connection conn = databaseConnector.getConnection();
+            Statement stmt = conn.createStatement()) {
+            String sql = "SELECT * FROM dbo.Users;";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                User user = new User(
+                        rs.getInt("userId"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")));
+                allUsers.add(user);
+            }
+            return allUsers;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not get users", ex);
+        }
     }
 
     @Override

@@ -110,8 +110,8 @@
                <children>
                   <TableView fx:id="tblAdmin" prefHeight="185.0" prefWidth="598.0">
                      <columns>
-                        <TableColumn fx:id="colName" prefWidth="169.59997862577438" text="User" />
-                        <TableColumn fx:id="colEmail" prefWidth="223.1999969482422" text="Email" />
+                        <TableColumn fx:id="colUsername" prefWidth="169.59997862577438" text="Username" />
+                        <TableColumn fx:id="colFullName" prefWidth="223.1999969482422" text="Full Name" />
                         <TableColumn fx:id="colRole" prefWidth="176.79998779296875" text="Role" />
                      </columns>
                   </TableView>

@@ -1,9 +1,12 @@
 package dk.easv.eventticketsystem.BLL;
 
+import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.PasswordHasher;
 import dk.easv.eventticketsystem.DAL.db.UserDAO_DB;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
+
+import java.util.List;
 
 public class UserManager {
     private IUserDataAccess userDataAccess;
@@ -38,5 +41,9 @@ public class UserManager {
         } else {
             return null;
         }
+    }
+
+    public List<User> getAllUsers() throws Exception{
+        return userDataAccess.getAllUsers();
     }
 }
