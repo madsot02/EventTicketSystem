@@ -13,4 +13,8 @@ public class UserModel {
     public User createUser(User user) throws Exception{
         return userManager.createUser(user);
     }
+
+    public User loginUser(String username, String password) throws Exception{
+        return userManager.loginUser(username, password);
+    }
 }

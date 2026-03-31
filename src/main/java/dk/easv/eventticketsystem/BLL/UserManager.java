@@ -24,4 +24,19 @@ public class UserManager {
 
         return userDataAccess.createUser(newUser);
     }
+    public User loginUser(String username, String password) throws Exception{
+        User user = userDataAccess.getUserByUsername(username);
+
+        if (user == null) {
+            return null;
+        }
+
+        boolean valid = PasswordHasher.verifyPassword(password, user.getPassword());
+
+        if(valid) {
+            return user;
+        } else {
+            return null;
+        }
+    }
 }

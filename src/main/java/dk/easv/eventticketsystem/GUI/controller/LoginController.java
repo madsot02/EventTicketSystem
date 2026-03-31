@@ -1,10 +1,15 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+import dk.easv.eventticketsystem.BE.Role;
+import dk.easv.eventticketsystem.BE.User;
+import dk.easv.eventticketsystem.BLL.utils.UserSession;
+import dk.easv.eventticketsystem.GUI.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -15,39 +20,65 @@ public class LoginController {
     @FXML private PasswordField pswPassword;
     @FXML private TextField txtUsername;
 
+    private UserModel userModel;
+    private UserSession session;
+    private User user;
+
+    public void initialize(){
+        try{
+            userModel = new UserModel();
+            session = UserSession.getInstance();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void onSignInClick(ActionEvent actionEvent) throws IOException {
-        String username = "hej";
-        String password = "bruh";
+        try {
+            String username = txtUsername.getText();
+            String password = pswPassword.getText();
 
-        String usernameAdmin = "admin";
-        String passwordAdmin = "admin";
+            user = userModel.loginUser(username, password);
 
-        if(txtUsername.getText().equals(username) && pswPassword.getText().equals(password)){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
+            if (user != null) {
+                session.setCurrentUser(user);
+            }
 
-            stage.setTitle("Coordinator View");
-            stage.setScene(scene);
 
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        }
-        else if (txtUsername.getText().equals(usernameAdmin) && pswPassword.getText().equals(passwordAdmin)){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/AdminView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
+            if (user.getRole() == Role.COORDINATOR) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
 
-            stage.setTitle("Admin View");
-            stage.setScene(scene);
+                stage.setTitle("Coordinator View");
+                stage.setScene(scene);
 
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } else if (user.getRole() == Role.ADMIN) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/AdminView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
 
-            Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            loginStage.close();
+                stage.setTitle("Admin View");
+                stage.setScene(scene);
 
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+
+                Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                loginStage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Login failed");
+                alert.setHeaderText("Invalid username and password");
+                alert.showAndWait();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

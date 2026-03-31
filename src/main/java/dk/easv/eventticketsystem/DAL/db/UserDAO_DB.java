@@ -1,5 +1,6 @@
 package dk.easv.eventticketsystem.DAL.db;
 
+import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
 
@@ -15,6 +16,31 @@ public class UserDAO_DB implements IUserDataAccess {
     private DBConnector databaseConnector = new DBConnector();
 
     public UserDAO_DB() throws IOException {
+    }
+
+    @Override
+    public User getUserByUsername(String username) throws Exception {
+        String sql = "SELECT * FROM dbo.Users WHERE username = ?;";
+
+        try (Connection conn = databaseConnector.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()) {
+                return new User(
+                        rs.getInt("userId"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        Role.valueOf(rs.getString("role")));
+            }
+            return null;
+        }
+
+
     }
 
     @Override
@@ -56,6 +82,6 @@ public class UserDAO_DB implements IUserDataAccess {
 
     @Override
     public void deleteUser(int userId) {
-
     }
+
 }
