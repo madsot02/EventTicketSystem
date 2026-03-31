@@ -35,50 +35,49 @@ public class LoginController {
     }
 
     @FXML
-    private void onSignInClick(ActionEvent actionEvent) throws IOException {
-        try {
-            String username = txtUsername.getText();
-            String password = pswPassword.getText();
+    private void onSignInClick(ActionEvent actionEvent) throws Exception {
 
-            user = userModel.loginUser(username, password);
+        String username = txtUsername.getText();
+        String password = pswPassword.getText();
 
-            if (user != null) {
-                session.setCurrentUser(user);
-            }
+        user = userModel.loginUser(username, password);
+
+        if(user == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Login failed");
+            alert.setHeaderText("Invalid username or password");
+            alert.showAndWait();
+            return;
+        }
+        session.setCurrentUser(user);
 
 
-            if (user.getRole() == Role.COORDINATOR) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
+        if (user.getRole() == Role.COORDINATOR) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
 
-                stage.setTitle("Coordinator View");
-                stage.setScene(scene);
+            stage.setTitle("Coordinator View");
+            stage.setScene(scene);
 
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
-            } else if (user.getRole() == Role.ADMIN) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/AdminView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
 
-                stage.setTitle("Admin View");
-                stage.setScene(scene);
+            Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            loginStage.close();
+        } else if (user.getRole() == Role.ADMIN) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/AdminView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
 
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
+            stage.setTitle("Admin View");
+            stage.setScene(scene);
 
-                Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                loginStage.close();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Login failed");
-                alert.setHeaderText("Invalid username and password");
-                alert.showAndWait();
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+            Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            loginStage.close();
         }
     }
 }
