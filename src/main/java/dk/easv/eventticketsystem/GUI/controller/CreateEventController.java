@@ -37,6 +37,12 @@ public class CreateEventController {
 
     public void initialize() {
 
+        initTime(cBoxTimeSelectEnd);
+
+        initTime(cBoxTimeSelectStart);
+    }
+
+    private void initTime(ComboBox<String> cBoxTimeSelectEnd) {
         cBoxTimeSelectEnd.getItems().addAll(
                 "00.00","00.30","01.00","01.30","02.00","02.30","03.00","03.30","04.00","04.30","05.00","05.30",
                 "06.00","06.30","07.00","07.30","08.00","08.30","09.00","09.30","10.00","10.30","11.00","11.30",
@@ -47,18 +53,6 @@ public class CreateEventController {
         cBoxTimeSelectEnd.setOnAction(e -> {
             String selectedEnd = cBoxTimeSelectEnd.getSelectionModel().getSelectedItem();
             cBoxTimeSelectEnd.setPromptText(selectedEnd);
-        });
-
-        cBoxTimeSelectStart.getItems().addAll(
-                "00.00","00.30","01.00","01.30","02.00","02.30","03.00","03.30","04.00","04.30","05.00","05.30",
-                "06.00","06.30","07.00","07.30","08.00","08.30","09.00","09.30","10.00","10.30","11.00","11.30",
-                "12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","16.30","17.00","17.30",
-                "18.00","18.30","19.00","19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30"
-        );
-
-        cBoxTimeSelectStart.setOnAction(s -> {
-            String selectedStart = cBoxTimeSelectStart.getSelectionModel().getSelectedItem();
-            cBoxTimeSelectStart.setPromptText(selectedStart);
         });
     }
 
@@ -110,6 +104,13 @@ public class CreateEventController {
             alert.showAndWait();
             return;
         }
+        if (startDate.equals(endDate) && endTime.compareTo(startTime) <= 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Time");
+            alert.setHeaderText("End time cannot be before or equal to start time on the same day");
+            alert.showAndWait();
+            return;
+        }
 
         int ticketsAvailable;
         try {
@@ -126,6 +127,13 @@ public class CreateEventController {
             alert.showAndWait();
             return;
         }
+        if (endDate.isBefore(startDate)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Date");
+            alert.setHeaderText("End date cannot be before start date");
+            alert.showAndWait();
+            return;
+        }
 
         try {
             if (editMode && editingEvent != null) {
@@ -138,7 +146,7 @@ public class CreateEventController {
                 editingEvent.setLocation(location);
                 editingEvent.setDescription(description);
                 editingEvent.setTicketsAvailable(ticketsAvailable);
-                editingEvent.setIsDeleted(false);
+                //editingEvent.setIsDeleted(false);
 
                 eventModel.updateEvent(editingEvent);
 

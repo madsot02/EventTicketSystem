@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,9 +17,12 @@ public class CreateUserController {
     @FXML
     private TextField txtUsername;
     @FXML
-    private TextField txtEmail;
+    private PasswordField pwPassword;
     @FXML
-    private ComboBox cbRole;
+    private TextField txtFirstName;
+    @FXML
+    private TextField txtLastName;
+
 
     @FXML
     private void handleCancel(ActionEvent actionEvent) {

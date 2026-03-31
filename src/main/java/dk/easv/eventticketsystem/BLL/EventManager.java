@@ -7,7 +7,7 @@ import dk.easv.eventticketsystem.DAL.interfaces.IEventDataAccess;
 import java.util.List;
 
 public class EventManager{
-    private IEventDataAccess eventDataAccess;
+    private final IEventDataAccess eventDataAccess;
 
     public EventManager() throws Exception{
         eventDataAccess = new EventDAO_DB();
