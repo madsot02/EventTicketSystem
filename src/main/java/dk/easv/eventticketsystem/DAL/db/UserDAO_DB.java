@@ -1,4 +1,61 @@
 package dk.easv.eventticketsystem.DAL.db;
 
-public class UserDAO_DB {
+import dk.easv.eventticketsystem.BE.User;
+import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.List;
+import java.sql.*;
+
+public class UserDAO_DB implements IUserDataAccess {
+    private DBConnector databaseConnector = new DBConnector();
+
+    public UserDAO_DB() throws IOException {
+    }
+
+    @Override
+    public User createUser(User newUser) throws Exception {
+        String sql = "INSERT INTO dbo.Users (firstName, lastName, username, password, role) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, newUser.getFirstName());
+            stmt.setString(2, newUser.getLastName());
+            stmt.setString(3, newUser.getUsername());
+            stmt.setString(4, newUser.getPassword());
+            stmt.setString(5, newUser.getRole().toString());
+
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            int userId;
+
+            if (rs.next()) {
+                userId = rs.getInt(1);
+            } else {
+                throw new Exception("Creating user failed, no ID obtained");
+            }
+            return new User(userId,
+                    newUser.getFirstName(),
+                    newUser.getLastName(),
+                    newUser.getUsername(),
+                    newUser.getPassword(),
+                    newUser.getRole());
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return List.of();
+    }
+
+    @Override
+    public void deleteUser(int userId) {
+
+    }
 }
