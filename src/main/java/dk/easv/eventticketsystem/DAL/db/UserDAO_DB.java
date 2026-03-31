@@ -104,7 +104,18 @@ public class UserDAO_DB implements IUserDataAccess {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public void deleteUser(int userId) throws Exception {
+        String sql = "DELETE FROM dbo.Users WHERE userId = ?;";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not delete user from database.",ex);
+        }
     }
 
 }

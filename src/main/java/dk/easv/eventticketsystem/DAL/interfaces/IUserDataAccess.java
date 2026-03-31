@@ -8,5 +8,5 @@ public interface IUserDataAccess {
     User getUserByUsername(String username) throws  Exception;
     User createUser(User newUser) throws Exception;
     List<User> getAllUsers() throws  Exception;
-    void deleteUser(int userId);
+    void deleteUser(int userId) throws Exception;
 }

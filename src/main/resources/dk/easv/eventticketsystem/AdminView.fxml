@@ -122,7 +122,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleRemoveCoordinator" prefHeight="22.0" prefWidth="150.0" styleClass="action-button-remove" stylesheets="@style.css" text="Remove Coordinator" HBox.hgrow="NEVER">
+                  <Button fx:id="btnRemoveCoordinator" mnemonicParsing="false" onAction="#handleRemoveCoordinator" prefHeight="22.0" prefWidth="150.0" styleClass="action-button-remove" stylesheets="@style.css" text="Remove Coordinator" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

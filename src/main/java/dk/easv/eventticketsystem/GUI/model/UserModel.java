@@ -28,4 +28,9 @@ public class UserModel {
     public User loginUser(String username, String password) throws Exception{
         return userManager.loginUser(username, password);
     }
+
+    public void deleteUser(User selectedUser) throws Exception {
+userManager.deleteUser(selectedUser);
+users.remove(selectedUser);
+    }
 }

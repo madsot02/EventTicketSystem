@@ -46,4 +46,8 @@ public class UserManager {
     public List<User> getAllUsers() throws Exception{
         return userDataAccess.getAllUsers();
     }
+
+    public void deleteUser(User selectedUser) throws Exception {
+        userDataAccess.deleteUser(selectedUser.getUserId());
+    }
 }
