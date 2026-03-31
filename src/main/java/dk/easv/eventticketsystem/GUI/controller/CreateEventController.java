@@ -127,6 +127,13 @@ public class CreateEventController {
             alert.showAndWait();
             return;
         }
+        if (endDate.isBefore(startDate)) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Date");
+            alert.setHeaderText("End date cannot be before start date");
+            alert.showAndWait();
+            return;
+        }
 
         try {
             if (editMode && editingEvent != null) {
