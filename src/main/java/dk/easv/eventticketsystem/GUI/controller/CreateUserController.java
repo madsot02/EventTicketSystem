@@ -30,7 +30,7 @@ public class CreateUserController {
     @FXML
     public void initialize(){
         try{
-            userModel = new UserModel();
+            //userModel = new UserModel();
 
             cmbRole.getItems().addAll(Role.values());
 
@@ -39,6 +39,9 @@ public class CreateUserController {
         }
     }
 
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
     @FXML
     private void handleCancel(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

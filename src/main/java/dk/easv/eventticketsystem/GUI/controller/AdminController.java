@@ -84,6 +84,9 @@ public class AdminController {
         stage.setTitle("Create User View");
         stage.setScene(scene);
 
+        CreateUserController userController = loader.getController();
+        userController.setUserModel(userModel); // pass the shared model
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }

@@ -22,7 +22,9 @@ public class UserModel {
     }
 
     public User createUser(User user) throws Exception{
-        return userManager.createUser(user);
+        User created = userManager.createUser(user);
+        users.add(created);
+        return created;
     }
 
     public User loginUser(String username, String password) throws Exception{
