@@ -102,9 +102,19 @@ public class AdminController {
             alert.showAndWait();
             return;
         }
+
+        UserSession session = UserSession.getInstance();
+        if (selectedUser.getUserId() == session.getCurrentUser().getUserId()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Action Not Allowed");
+            alert.setHeaderText("You cannot remove your own account");
+            alert.showAndWait();
+            return;
+        }
+
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirm Delete");
-        confirm.setHeaderText("Are you sure you want to delete this Event");
+        confirm.setHeaderText("Are you sure you want to delete this User");
         confirm.setContentText(selectedUser.getFullName());
         if(confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK){
             return;
