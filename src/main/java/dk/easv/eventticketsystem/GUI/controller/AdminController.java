@@ -95,13 +95,13 @@ public class AdminController {
         if(selectedUser == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Event Selected");
-            alert.setHeaderText("Please select an event to delete");
+            alert.setHeaderText("Please select an user to delete");
             alert.showAndWait();
             return;
         }
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirm Delete");
-        confirm.setHeaderText("Are you sure you want to delete this event");
+        confirm.setHeaderText("Are you sure you want to delete this Event");
         confirm.setContentText(selectedUser.getFullName());
         if(confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK){
             return;

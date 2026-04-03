@@ -54,8 +54,11 @@ public class CreateUserController {
                     txtUsername.getText(),
                     pwPassword.getText(),
                     cmbRole.getValue());
-
             userModel.createUser(user);
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
