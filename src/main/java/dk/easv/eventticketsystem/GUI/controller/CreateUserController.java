@@ -1,5 +1,6 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
@@ -8,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,6 +24,10 @@ public class CreateUserController {
     @FXML private Button btnEditAndCreate;
 
     private UserModel userModel;
+    private User editingUser = null;
+    private boolean editMode = false;
+    @FXML
+    private Label lblAddEditUser;
 
     @FXML
     public void initialize(){
@@ -48,16 +50,46 @@ public class CreateUserController {
         stage.close();
     }
 
+    public void setEditingUser(User user) {
+        if (user != null) {
+            this.editingUser = user;
+            this.editMode = true;
+
+            txtFirstName.setText(user.getFirstName());
+            txtLastName.setText(user.getLastName());
+            txtUsername.setText(user.getUsername());
+            cmbRole.setValue(user.getRole());
+            // leave password blank — user fills in new one if they want to change it
+
+            btnEditAndCreate.setText("Edit User");
+            lblAddEditUser.setText("Edit User");
+        }
+    }
+
     @FXML
     private void handleCreateUser(ActionEvent actionEvent) throws IOException {
         try {
-            User user = new User(0,
-                    txtFirstName.getText(),
-                    txtLastName.getText(),
-                    txtUsername.getText(),
-                    pwPassword.getText(),
-                    cmbRole.getValue());
-            userModel.createUser(user);
+            if (editMode && editingUser != null) {
+                editingUser.setFirstName(txtFirstName.getText());
+                editingUser.setLastName(txtLastName.getText());
+                editingUser.setUsername(txtUsername.getText());
+                editingUser.setRole(cmbRole.getValue());
+
+                // Only update password if user typed a new one
+                if (!pwPassword.getText().isBlank()) {
+                    editingUser.setPassword(pwPassword.getText());
+                }
+
+                userModel.updateUser(editingUser);
+            } else {
+                User user = new User(0,
+                        txtFirstName.getText(),
+                        txtLastName.getText(),
+                        txtUsername.getText(),
+                        pwPassword.getText(),
+                        cmbRole.getValue());
+                userModel.createUser(user);
+            }
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.close();

@@ -47,7 +47,17 @@ public class UserManager {
         return userDataAccess.getAllUsers();
     }
 
+    public void updateUser(User user) throws Exception {
+
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            user.setPassword(PasswordHasher.hashPassword(user.getPassword()));
+        }
+        userDataAccess.updateUser(user);
+    }
+
     public void deleteUser(User selectedUser) throws Exception {
         userDataAccess.deleteUser(selectedUser.getUserId());
     }
+
+
 }

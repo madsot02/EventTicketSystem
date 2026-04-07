@@ -12,13 +12,13 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.CreateUserController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.CreateUserController">
    <top>
       <HBox alignment="BOTTOM_CENTER" prefHeight="48.0" prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="48.0" prefWidth="130.0">
                <children>
-                  <Label styleClass="title-text" stylesheets="@style.css" text="Add New User">
+                  <Label fx:id="lblAddEditUser" styleClass="title-text" stylesheets="@style.css" text="Add New User">
                      <font>
                         <Font size="18.0" />
                      </font>

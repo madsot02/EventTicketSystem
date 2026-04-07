@@ -9,4 +9,5 @@ public interface IUserDataAccess {
     User createUser(User newUser) throws Exception;
     List<User> getAllUsers() throws  Exception;
     void deleteUser(int userId) throws Exception;
+    void updateUser(User user) throws Exception;
 }

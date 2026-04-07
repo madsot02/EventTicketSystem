@@ -87,6 +87,8 @@ public class AdminController {
         CreateUserController userController = loader.getController();
         userController.setUserModel(userModel); // pass the shared model
 
+
+
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
@@ -131,4 +133,23 @@ public class AdminController {
             e.printStackTrace();
         }
         }
+
+    @FXML
+    private void handleEditUser(ActionEvent actionEvent) throws IOException {
+        User selectedUser = tblAdmin.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) return;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateUserView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage stage = new Stage();
+
+        stage.setTitle("Edit User");
+        stage.setScene(scene);
+
+        CreateUserController userController = loader.getController();
+        userController.setUserModel(userModel);
+        userController.setEditingUser(selectedUser);
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
+}

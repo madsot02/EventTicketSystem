@@ -30,6 +30,13 @@ public class UserModel {
     public User loginUser(String username, String password) throws Exception{
         return userManager.loginUser(username, password);
     }
+    public void updateUser(User user) throws Exception {
+        userManager.updateUser(user);
+        int index = users.indexOf(user);
+        if (index != -1) {
+            users.set(index, user);
+        }
+    }
 
     public void deleteUser(User selectedUser) throws Exception {
 userManager.deleteUser(selectedUser);
