@@ -3,6 +3,7 @@ package dk.easv.eventticketsystem.GUI.controller;
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
+import dk.easv.eventticketsystem.GUI.model.EventModel;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -16,56 +17,54 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class AdminController {
 
-
+    // User table
     @FXML private TableView<User> tblAdmin;
-    @FXML
-    private TableColumn<User, String> colFullName;
-    @FXML
-    private TableColumn<User, String> colUsername;
+    @FXML private TableColumn<User, String> colFullName;
+    @FXML private TableColumn<User, String> colUsername;
     @FXML private TableColumn<User, String> colRole;
+    @FXML private Button btnRemoveCoordinatorOrEvent;
+
+    // Event table
+    @FXML private TableView<Event> tblEventManagement;
+    @FXML private TableColumn<Event, String> colEventName;
+    @FXML private TableColumn<Event, String> colEventLocation;
+    @FXML private TableColumn<Event, LocalDate> colStartDateAdmin;
+    @FXML private TableColumn<Event, LocalDate> colEndDateAdmin;
 
     private UserModel userModel;
+    private EventModel eventModel;
 
-    FilteredList<User> filteredUsers;
-    @FXML
-    private Button btnRemoveCoordinator;
-    @FXML
-    private Button btnRemoveCoordinatorOrEvent;
-    @FXML
-    private TableColumn colEndDateAdmin;
-    @FXML
-    private TableColumn colStartDateAdmin;
-    @FXML
-    private TableColumn colEventLocation;
-    @FXML
-    private TableColumn colEventName;
-    @FXML
-    private TableView tblEventManagement;
-
-    public void initialize(){
+    public void initialize() {
+        // User table setup
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
-        btnRemoveCoordinator.disableProperty().bind(
-                tblAdmin.getSelectionModel().selectedItemProperty().isNull()); // greys out button, until a user is selected
+        // Event table setup
+        colEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colEventLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colStartDateAdmin.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        colEndDateAdmin.setCellValueFactory(new PropertyValueFactory<>("endDate"));
 
-
-
-        try{
+        try {
             userModel = new UserModel();
             tblAdmin.setItems(userModel.getObservableUsers());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    @FXML
-    private void handleAddUserAdmin(ActionEvent actionEvent) throws IOException {
 
+        try {
+            eventModel = new EventModel();
+            FilteredList<Event> activeEvents = new FilteredList<>(eventModel.getObservableEvents(), Event::isActive);
+            tblEventManagement.setItems(activeEvents);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -76,7 +75,6 @@ public class AdminController {
 
         stage.setTitle("Login");
         stage.setScene(scene);
-
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
 
@@ -93,13 +91,11 @@ public class AdminController {
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
 
-        stage.setTitle("Create User View");
+        stage.setTitle("Create User");
         stage.setScene(scene);
 
         CreateUserController userController = loader.getController();
-        userController.setUserModel(userModel); // pass the shared model
-
-
+        userController.setUserModel(userModel);
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
@@ -108,11 +104,33 @@ public class AdminController {
     @FXML
     private void handleRemoveCoordinator(ActionEvent actionEvent) {
         User selectedUser = tblAdmin.getSelectionModel().getSelectedItem();
+        Event selectedEvent = tblEventManagement.getSelectionModel().getSelectedItem();
 
-        if(selectedUser == null){
+
+        if (selectedEvent != null) {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirm Delete");
+            confirm.setHeaderText("Are you sure you want to delete this event?");
+            confirm.setContentText(selectedEvent.getName());
+            if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
+
+            try {
+                eventModel.deleteEvent(selectedEvent);
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete Error");
+                alert.setHeaderText(e.getMessage());
+                alert.showAndWait();
+                e.printStackTrace();
+            }
+            return;
+        }
+
+
+        if (selectedUser == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Event Selected");
-            alert.setHeaderText("Please select an user to delete");
+            alert.setTitle("Nothing Selected");
+            alert.setHeaderText("Please select a user or event to delete");
             alert.showAndWait();
             return;
         }
@@ -128,28 +146,26 @@ public class AdminController {
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirm Delete");
-        confirm.setHeaderText("Are you sure you want to delete this User");
+        confirm.setHeaderText("Are you sure you want to delete this user?");
         confirm.setContentText(selectedUser.getFullName());
-        if(confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK){
-            return;
-        }
-        try{
-            userModel.deleteUser(selectedUser);
-            //filteredEvents.setPredicate(filteredEvents.getPredicate());
+        if (confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return;
 
-        } catch (Exception e){
+        try {
+            userModel.deleteUser(selectedUser);
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Delete Error");
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
             e.printStackTrace();
         }
-        }
+    }
 
     @FXML
     private void handleEditUser(ActionEvent actionEvent) throws IOException {
         User selectedUser = tblAdmin.getSelectionModel().getSelectedItem();
         if (selectedUser == null) return;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateUserView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
