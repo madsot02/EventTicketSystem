@@ -32,6 +32,18 @@ public class AdminController {
     FilteredList<User> filteredUsers;
     @FXML
     private Button btnRemoveCoordinator;
+    @FXML
+    private Button btnRemoveCoordinatorOrEvent;
+    @FXML
+    private TableColumn colEndDateAdmin;
+    @FXML
+    private TableColumn colStartDateAdmin;
+    @FXML
+    private TableColumn colEventLocation;
+    @FXML
+    private TableColumn colEventName;
+    @FXML
+    private TableView tblEventManagement;
 
     public void initialize(){
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
