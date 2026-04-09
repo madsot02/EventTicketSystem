@@ -1,10 +1,13 @@
 package dk.easv.eventticketsystem.GUI.model;
 
 import dk.easv.eventticketsystem.BE.Event;
+import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.EventManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class EventModel{
     private EventManager eventManager;
@@ -42,4 +45,16 @@ public class EventModel{
         events.remove(selectedEvent);
         events.add(selectedEvent);
     }
+    public void addCoordinatorToEvent(int eventId, int userId) throws Exception {
+        eventManager.addCoordinatorToEvent(eventId, userId);
+    }
+
+    public void removeCoordinatorFromEvent(int eventId, int userId) throws Exception {
+        eventManager.removeCoordinatorFromEvent(eventId, userId);
+    }
+
+    public List<User> getCoordinatorsForEvent(int eventId) throws Exception {
+        return eventManager.getCoordinatorsForEvent(eventId);
+    }
 }
+

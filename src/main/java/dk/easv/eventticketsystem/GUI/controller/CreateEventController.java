@@ -1,7 +1,10 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
 import dk.easv.eventticketsystem.BE.Event;
+import dk.easv.eventticketsystem.BE.Role;
+import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
+import dk.easv.eventticketsystem.GUI.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,50 +12,66 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateEventController {
 
-    @FXML
-    private TextField txtEnterEventName;
-    @FXML
-    private TextField txtLocation;
-    @FXML
-    private TextArea txtAreaDescription;
-    @FXML
-    private Button editBtn;
-    @FXML
-    private ComboBox<String> cBoxTimeSelectEnd;
-    @FXML
-    private DatePicker txtEndDate;
-    @FXML
-    private ComboBox<String> cBoxTimeSelectStart;
-    @FXML
-    private DatePicker txtStartDate;
-    @FXML
-    private TextField txtTicketsAvailable;
+    @FXML private TextField txtEnterEventName;
+    @FXML private TextField txtLocation;
+    @FXML private TextArea txtAreaDescription;
+    @FXML private Button editBtn;
+    @FXML private ComboBox<String> cBoxTimeSelectEnd;
+    @FXML private DatePicker txtEndDate;
+    @FXML private ComboBox<String> cBoxTimeSelectStart;
+    @FXML private DatePicker txtStartDate;
+    @FXML private TextField txtTicketsAvailable;
+    @FXML private ListView<User> listViewCoordinators;
 
     private EventModel eventModel;
+    private UserModel userModel;
     private Event editingEvent = null;
     private boolean editMode = false;
+    private List<User> previouslyAssigned = new ArrayList<>();
 
     public void initialize() {
-
         initTime(cBoxTimeSelectEnd);
-
         initTime(cBoxTimeSelectStart);
+
+
+        listViewCoordinators.setCellFactory(lv -> new ListCell<>() {
+            @Override
+            protected void updateItem(User user, boolean empty) {
+                super.updateItem(user, empty);
+                setText(empty || user == null ? null : user.getFullName());
+            }
+        });
+
+        listViewCoordinators.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        try {
+            userModel = new UserModel();
+            // Only show coordinators in the list
+            for (User u : userModel.getObservableUsers()) {
+                if (u.getRole() == Role.COORDINATOR) {
+                    listViewCoordinators.getItems().add(u);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initTime(ComboBox<String> cBoxTimeSelectEnd) {
-        cBoxTimeSelectEnd.getItems().addAll(
+    private void initTime(ComboBox<String> comboBox) {
+        comboBox.getItems().addAll(
                 "00.00","00.30","01.00","01.30","02.00","02.30","03.00","03.30","04.00","04.30","05.00","05.30",
                 "06.00","06.30","07.00","07.30","08.00","08.30","09.00","09.30","10.00","10.30","11.00","11.30",
                 "12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","16.30","17.00","17.30",
                 "18.00","18.30","19.00","19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30"
         );
-
-        cBoxTimeSelectEnd.setOnAction(e -> {
-            String selectedEnd = cBoxTimeSelectEnd.getSelectionModel().getSelectedItem();
-            cBoxTimeSelectEnd.setPromptText(selectedEnd);
+        comboBox.setOnAction(e -> {
+            String selected = comboBox.getSelectionModel().getSelectedItem();
+            comboBox.setPromptText(selected);
         });
     }
 
@@ -73,15 +92,26 @@ public class CreateEventController {
             txtTicketsAvailable.setText(String.valueOf(event.getTicketsAvailable()));
             cBoxTimeSelectStart.setValue(event.getStartTime());
             cBoxTimeSelectEnd.setValue(event.getEndTime());
-
             editBtn.setText("Edit Event");
+
+
+            try {
+                previouslyAssigned = eventModel.getCoordinatorsForEvent(event.getId());
+                for (User u : listViewCoordinators.getItems()) {
+                    for (User assigned : previouslyAssigned) {
+                        if (u.getUserId() == assigned.getUserId()) {
+                            listViewCoordinators.getSelectionModel().select(u);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @FXML
     private void handleCreateEvent(ActionEvent actionEvent) {
-
-        // ✅ safety check (helps debugging if something breaks again)
         if (eventModel == null) {
             System.out.println("ERROR: eventModel is null");
             return;
@@ -95,7 +125,6 @@ public class CreateEventController {
         String location = txtLocation.getText().trim();
         String description = txtAreaDescription.getText().trim();
         String ticketsText = txtTicketsAvailable.getText().trim();
-
 
         if (name.isEmpty() || startDate == null || endDate == null || location.isEmpty() || startTime == null || endTime == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -136,8 +165,9 @@ public class CreateEventController {
         }
 
         try {
-            if (editMode && editingEvent != null) {
+            Event savedEvent;
 
+            if (editMode && editingEvent != null) {
                 editingEvent.setName(name);
                 editingEvent.setStartDate(startDate);
                 editingEvent.setEndDate(endDate);
@@ -146,13 +176,32 @@ public class CreateEventController {
                 editingEvent.setLocation(location);
                 editingEvent.setDescription(description);
                 editingEvent.setTicketsAvailable(ticketsAvailable);
-                //editingEvent.setIsDeleted(false);
-
                 eventModel.updateEvent(editingEvent);
-
+                savedEvent = editingEvent;
             } else {
                 Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, false);
-                eventModel.createEvent(newEvent);
+                savedEvent = eventModel.createEvent(newEvent);
+            }
+
+
+            List<User> selectedNow = new ArrayList<>(listViewCoordinators.getSelectionModel().getSelectedItems());
+
+
+            for (User u : selectedNow) {
+                boolean wasAssigned = previouslyAssigned.stream()
+                        .anyMatch(p -> p.getUserId() == u.getUserId());
+                if (!wasAssigned) {
+                    eventModel.addCoordinatorToEvent(savedEvent.getId(), u.getUserId());
+                }
+            }
+
+
+            for (User u : previouslyAssigned) {
+                boolean stillSelected = selectedNow.stream()
+                        .anyMatch(s -> s.getUserId() == u.getUserId());
+                if (!stillSelected) {
+                    eventModel.removeCoordinatorFromEvent(savedEvent.getId(), u.getUserId());
+                }
             }
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
