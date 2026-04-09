@@ -202,4 +202,8 @@ public class AdminController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
+    @FXML
+    private void handleDeleteEvent(ActionEvent actionEvent) {
+    }
 }

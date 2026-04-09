@@ -160,6 +160,7 @@
                   </Button>
                   <Button mnemonicParsing="false" onAction="#handleEditUser" text="Edit User" />
                   <Button mnemonicParsing="false" onAction="#handleAssignCoordinators" text="Assign Coordinators" />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteEvent" text="Delete Event" />
                </children>
                <padding>
                   <Insets left="15.0" />
