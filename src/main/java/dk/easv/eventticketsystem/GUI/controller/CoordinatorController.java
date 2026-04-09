@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 
 public class CoordinatorController {
 
+    public TableColumn<Event, String> colAssignedCoordinators;
     @FXML
     private TableView<Event> tblEvents;
     @FXML
@@ -53,6 +55,7 @@ public class CoordinatorController {
     colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
     colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
     colTicketsAvailable.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
+    colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
 
 
