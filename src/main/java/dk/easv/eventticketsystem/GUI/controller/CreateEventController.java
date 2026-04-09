@@ -3,6 +3,7 @@ package dk.easv.eventticketsystem.GUI.controller;
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
+import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
 import javafx.event.ActionEvent;
@@ -60,6 +61,8 @@ public class CreateEventController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        applyRolePermissions();
     }
 
     private void initTime(ComboBox<String> comboBox) {
@@ -93,6 +96,7 @@ public class CreateEventController {
             cBoxTimeSelectStart.setValue(event.getStartTime());
             cBoxTimeSelectEnd.setValue(event.getEndTime());
             editBtn.setText("Edit Event");
+            applyRolePermissions();
 
 
             try {
@@ -167,17 +171,25 @@ public class CreateEventController {
         try {
             Event savedEvent;
 
+            Role role = UserSession.getInstance().getCurrentUser().getRole();
+
             if (editMode && editingEvent != null) {
-                editingEvent.setName(name);
-                editingEvent.setStartDate(startDate);
-                editingEvent.setEndDate(endDate);
-                editingEvent.setStartTime(startTime);
-                editingEvent.setEndTime(endTime);
-                editingEvent.setLocation(location);
-                editingEvent.setDescription(description);
-                editingEvent.setTicketsAvailable(ticketsAvailable);
-                eventModel.updateEvent(editingEvent);
+
+                if (role == Role.COORDINATOR) {
+                    editingEvent.setName(name);
+                    editingEvent.setStartDate(startDate);
+                    editingEvent.setEndDate(endDate);
+                    editingEvent.setStartTime(startTime);
+                    editingEvent.setEndTime(endTime);
+                    editingEvent.setLocation(location);
+                    editingEvent.setDescription(description);
+                    editingEvent.setTicketsAvailable(ticketsAvailable);
+
+                    eventModel.updateEvent(editingEvent);
+                }
+
                 savedEvent = editingEvent;
+
             } else {
                 Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, false);
                 savedEvent = eventModel.createEvent(newEvent);
@@ -213,6 +225,40 @@ public class CreateEventController {
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
             e.printStackTrace();
+        }
+    }
+
+    private void applyRolePermissions() {
+        Role role = UserSession.getInstance().getCurrentUser().getRole();
+
+        if (role == Role.ADMIN) {
+            txtEnterEventName.setEditable(false);
+            txtLocation.setEditable(false);
+            txtAreaDescription.setEditable(false);
+            txtStartDate.setDisable(true);
+            txtEndDate.setDisable(true);
+            cBoxTimeSelectStart.setDisable(true);
+            cBoxTimeSelectEnd.setDisable(true);
+            txtTicketsAvailable.setEditable(false);
+
+            listViewCoordinators.setDisable(false);
+
+            editBtn.setText("Assign Coordinators");
+        }
+
+        if (role == Role.COORDINATOR) {
+            txtEnterEventName.setEditable(true);
+            txtLocation.setEditable(true);
+            txtAreaDescription.setEditable(true);
+            txtStartDate.setDisable(false);
+            txtEndDate.setDisable(false);
+            cBoxTimeSelectStart.setDisable(false);
+            cBoxTimeSelectEnd.setDisable(false);
+            txtTicketsAvailable.setEditable(true);
+
+            listViewCoordinators.setDisable(false);
+
+            editBtn.setText("Edit Event");
         }
     }
 }
