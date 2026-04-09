@@ -216,6 +216,14 @@ public class CreateEventController {
                 }
             }
 
+            List<User> updatedCoords = eventModel.getCoordinatorsForEvent(savedEvent.getId());
+            String names = updatedCoords.stream()
+                    .map(User::getFullName)
+                    .collect(java.util.stream.Collectors.joining(", "));
+            savedEvent.setAssignedCoordinators(names);
+
+            eventModel.refreshCoordinators(savedEvent);
+
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.close();
 

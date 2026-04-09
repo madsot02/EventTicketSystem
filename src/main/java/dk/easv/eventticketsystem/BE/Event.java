@@ -13,6 +13,7 @@ public class Event {
     private String startTime;
     private String endTime;
     private boolean isDeleted;
+    private String assignedCoordinators = "";
 
     public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime, boolean isDeleted){
         this.id = id;
@@ -102,6 +103,14 @@ public class Event {
     public boolean getIsDeleted(){return isDeleted;}
 
     public void setIsDeleted(boolean isDeleted){this.isDeleted = isDeleted;}
+
+    public String getAssignedCoordinators() {
+        return assignedCoordinators;
+    }
+
+    public void setAssignedCoordinators(String assignedCoordinators) {
+        this.assignedCoordinators = assignedCoordinators;
+    }
 
     public boolean isActive(){
         return !isDeleted && endDate != null && !endDate.isBefore(LocalDate.now());

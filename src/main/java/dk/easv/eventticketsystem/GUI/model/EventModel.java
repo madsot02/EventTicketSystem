@@ -13,11 +13,18 @@ public class EventModel{
     private EventManager eventManager;
     private ObservableList<Event> events;
 
-    public EventModel() throws Exception{
+    public EventModel() throws Exception {
         eventManager = new EventManager();
-
         events = FXCollections.observableArrayList();
-        events.addAll(eventManager.getAllEvents());
+
+        for (Event e : eventManager.getAllEvents()) {
+            List<User> coords = eventManager.getCoordinatorsForEvent(e.getId());
+            String names = coords.stream()
+                    .map(User::getFullName)
+                    .collect(java.util.stream.Collectors.joining(", "));
+            e.setAssignedCoordinators(names);
+            events.add(e);
+        }
     }
 
     public ObservableList<Event> getObservableEvents() {
@@ -55,6 +62,18 @@ public class EventModel{
 
     public List<User> getCoordinatorsForEvent(int eventId) throws Exception {
         return eventManager.getCoordinatorsForEvent(eventId);
+    }
+    public void refreshCoordinators(Event event) throws Exception {
+        List<User> coords = eventManager.getCoordinatorsForEvent(event.getId());
+        String names = coords.stream()
+                .map(User::getFullName)
+                .collect(java.util.stream.Collectors.joining(", "));
+        event.setAssignedCoordinators(names);
+
+        int index = events.indexOf(event);
+        if (index != -1) {
+            events.set(index, event);
+        }
     }
 }
 

@@ -50,6 +50,7 @@ public class AdminController {
         colEventLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         colStartDateAdmin.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         colEndDateAdmin.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
         try {
             userModel = new UserModel();

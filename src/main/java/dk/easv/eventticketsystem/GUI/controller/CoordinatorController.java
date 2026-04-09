@@ -112,6 +112,7 @@ public class CoordinatorController {
         }
         try{
             eventModel.deleteEvent(selectedEvent);
+
             //filteredEvents.setPredicate(filteredEvents.getPredicate());
 
         } catch (Exception e){
