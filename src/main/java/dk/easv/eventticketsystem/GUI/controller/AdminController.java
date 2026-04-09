@@ -205,5 +205,33 @@ public class AdminController {
 
     @FXML
     private void handleDeleteEvent(ActionEvent actionEvent) {
+        Event selectedEvent = tblEventManagement.getSelectionModel().getSelectedItem();
+
+        if(selectedEvent == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Event Selected");
+            alert.setHeaderText("Please select an event to delete");
+            alert.showAndWait();
+            return;
+        }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Delete");
+        confirm.setHeaderText("Are you sure you want to delete this event");
+        confirm.setContentText(selectedEvent.getName());
+        if(confirm.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK){
+            return;
+        }
+        try{
+            eventModel.deleteEvent(selectedEvent);
+
+            //filteredEvents.setPredicate(filteredEvents.getPredicate());
+
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Error");
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 }
