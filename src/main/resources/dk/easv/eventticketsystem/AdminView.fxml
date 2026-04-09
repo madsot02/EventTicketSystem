@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1288.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.AdminController">
    <center>
       <VBox prefHeight="678.0" prefWidth="1107.0" BorderPane.alignment="CENTER">
          <children>
@@ -117,7 +117,7 @@
                   <Insets bottom="10.0" left="15.0" right="15.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="243.0" prefWidth="1338.0" spacing="15.0">
+            <HBox prefHeight="243.0" prefWidth="1214.0" spacing="15.0">
                <children>
                   <VBox prefHeight="243.0" prefWidth="558.0">
                      <children>
@@ -130,14 +130,15 @@
                         </TableView>
                      </children>
                   </VBox>
-                  <VBox prefHeight="243.0" prefWidth="514.0">
+                  <VBox prefHeight="243.0" prefWidth="692.0">
                      <children>
-                        <TableView fx:id="tblEventManagement" prefHeight="243.0" prefWidth="416.0">
+                        <TableView fx:id="tblEventManagement" prefHeight="243.0" prefWidth="350.0">
                            <columns>
                               <TableColumn fx:id="colEventName" prefWidth="107.0" text="EventName" />
                               <TableColumn fx:id="colEventLocation" prefWidth="176.0" text="EventLocation" />
                               <TableColumn fx:id="colStartDateAdmin" prefWidth="99.0" text="StartDate" />
-                              <TableColumn fx:id="colEndDateAdmin" prefWidth="126.0" text="EndDate" />
+                              <TableColumn fx:id="colEndDateAdmin" minWidth="0.0" prefWidth="105.0" text="EndDate" />
+                              <TableColumn fx:id="colAssignedCoordinators" prefWidth="201.0" text="Assigned Coordinators" />
                            </columns>
                         </TableView>
                      </children>
@@ -158,6 +159,7 @@
                      </padding>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#handleEditUser" text="Edit User" />
+                  <Button mnemonicParsing="false" onAction="#handleAssignCoordinators" text="Assign Coordinators" />
                </children>
                <padding>
                   <Insets left="15.0" />

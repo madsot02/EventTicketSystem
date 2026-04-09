@@ -34,6 +34,7 @@ public class AdminController {
     @FXML private TableColumn<Event, String> colEventLocation;
     @FXML private TableColumn<Event, LocalDate> colStartDateAdmin;
     @FXML private TableColumn<Event, LocalDate> colEndDateAdmin;
+    @FXML private TableColumn colAssignedCoordinators;
 
     private UserModel userModel;
     private EventModel eventModel;
@@ -179,5 +180,10 @@ public class AdminController {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+    }
+
+    @FXML
+    private void handleAssignCoordinators(ActionEvent actionEvent) {
+
     }
 }
