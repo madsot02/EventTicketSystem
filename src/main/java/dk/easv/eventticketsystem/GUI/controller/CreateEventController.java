@@ -266,7 +266,11 @@ public class CreateEventController {
 
             listViewCoordinators.setDisable(false);
 
-            editBtn.setText("Edit Event");
+            if (editMode) {
+                editBtn.setText("Edit Event");
+            } else {
+                editBtn.setText("Create Event");
+            }
         }
     }
 }
