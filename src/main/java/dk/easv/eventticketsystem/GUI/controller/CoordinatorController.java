@@ -57,6 +57,19 @@ public class CoordinatorController {
     colTicketsAvailable.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
     colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
+        tblEvents.setRowFactory(tv -> {
+            TableRow<Event> row = new TableRow<>();
+            Tooltip tooltip = new Tooltip();
+            row.itemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    tooltip.setText(newVal.getDescription());
+                    Tooltip.install(row, tooltip);
+                } else {
+                    Tooltip.uninstall(row, tooltip);
+                }
+            });
+            return row;
+        });
 
 
         try {

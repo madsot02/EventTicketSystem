@@ -52,6 +52,20 @@ public class AdminController {
         colEndDateAdmin.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
+        tblEventManagement.setRowFactory(tv -> {
+            TableRow<Event> row = new TableRow<>();
+            Tooltip tooltip = new Tooltip();
+            row.itemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    tooltip.setText(newVal.getDescription());
+                    Tooltip.install(row, tooltip);
+                } else {
+                    Tooltip.uninstall(row, tooltip);
+                }
+            });
+            return row;
+        });
+
         try {
             userModel = new UserModel();
             tblAdmin.setItems(userModel.getObservableUsers());
