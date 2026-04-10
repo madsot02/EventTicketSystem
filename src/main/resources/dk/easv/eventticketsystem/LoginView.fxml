@@ -55,7 +55,7 @@
                   <Insets bottom="40.0" />
                </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#onSignInClick" styleClass="add-user-button" stylesheets="@style.css" text="Sign In">
+                  <Button mnemonicParsing="false" onAction="#onSignInClick" styleClass="add-user-button" stylesheets="@style.css" text="Sign In" defaultButton="true">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
