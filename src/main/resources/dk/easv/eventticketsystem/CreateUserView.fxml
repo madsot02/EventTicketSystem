@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
@@ -5,7 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+    <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -13,95 +14,95 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.CreateUserController">
-   <top>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="48.0" prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="48.0" prefWidth="130.0">
-               <children>
-                  <Label fx:id="lblAddEditUser" styleClass="title-text" stylesheets="@style.css" text="Add New User">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label text="Fill In Information" />
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets left="20.0" right="20.0" />
-         </padding>
-      </HBox>
-   </top>
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="89.0" prefWidth="300.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0" spacing="5.0">
-                     <children>
-                        <TextField fx:id="txtUsername" prefHeight="26.0" prefWidth="558.0" promptText="Enter Username" />
-                     </children>
-                     <padding>
+    <top>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="48.0" prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" prefHeight="48.0" prefWidth="130.0">
+                    <children>
+                        <Label fx:id="lblAddEditUser" styleClass="title-text" stylesheets="@style.css" text="Add New User">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label text="Fill In Information" />
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+        </HBox>
+    </top>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="89.0" prefWidth="300.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0" spacing="5.0">
+                            <children>
+                                <TextField fx:id="txtUsername" prefHeight="26.0" prefWidth="558.0" promptText="Enter Username" />
+                            </children>
+                            <padding>
+                                <Insets left="20.0" right="20.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="69.0" prefWidth="300.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="300.0" spacing="5.0">
+                            <children>
+                                <PasswordField fx:id="pwPassword" promptText="Enter Password" />
+                            </children>
+                            <padding>
+                                <Insets left="20.0" right="20.0" />
+                            </padding>
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="70.0" prefWidth="300.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="397.0" spacing="5.0">
+                            <padding>
+                                <Insets left="20.0" right="20.0" />
+                            </padding>
+                            <children>
+                                <TextField fx:id="txtFirstName" promptText="Enter First Name" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0" spacing="5.0">
+                            <padding>
+                                <Insets left="20.0" right="20.0" />
+                            </padding>
+                            <children>
+                                <TextField fx:id="txtLastName" promptText="Enter Last Name" />
+                                <ComboBox fx:id="cmbRole" prefWidth="150.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="btnEditAndCreate" mnemonicParsing="false" onAction="#handleCreateUser" prefHeight="42.0" prefWidth="157.0" styleClass="add-user-button" stylesheets="@style.css" text="Create User">
+                            <graphic>
+                                <SVGPath content="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" styleClass="button-icon-white" />
+                            </graphic></Button>
+                    </children>
+                    <padding>
                         <Insets left="20.0" right="20.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="69.0" prefWidth="300.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="300.0" spacing="5.0">
-                     <children>
-                        <PasswordField fx:id="pwPassword" promptText="Enter Password" />
-                     </children>
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="70.0" prefWidth="300.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="397.0" spacing="5.0">
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                     <children>
-                        <TextField fx:id="txtFirstName" promptText="Enter First Name" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0" spacing="5.0">
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
-                     <children>
-                        <TextField fx:id="txtLastName" promptText="Enter Last Name" />
-                        <ComboBox fx:id="cmbRole" prefWidth="150.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" spacing="15.0">
-               <children>
-                  <Button fx:id="btnEditAndCreate" mnemonicParsing="false" onAction="#handleCreateUser" prefHeight="42.0" prefWidth="157.0" styleClass="add-user-button" stylesheets="@style.css" text="Create User">
-                     <graphic>
-                        <SVGPath content="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" styleClass="button-icon-white" />
-                     </graphic></Button>
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
 </BorderPane>
