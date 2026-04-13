@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="380.0" prefWidth="420.0"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dk.easv.eventticketsystem.GUI.controller.ManageTicketTypesController">
+    <top>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="55.0" prefWidth="420.0">
+            <padding><Insets left="20.0" top="15.0"/></padding>
+            <children>
+                <Label styleClass="title-text" stylesheets="@style.css" text="Manage Ticket Types">
+                    <font><Font size="18.0"/></font>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="10.0">
+            <padding><Insets left="20.0" right="20.0"/></padding>
+            <children>
+                <TextField fx:id="txtTypeName" promptText="Type name (e.g. VIP, Free beer)"/>
+                <TextField fx:id="txtTypePrice" promptText="Price (0 for free)"/>
+                <CheckBox fx:id="chkVoucher" text="Is Voucher (no customer required)"/>
+                <Button text="Add Type" onAction="#handleAddType" styleClass="add-user-button" stylesheets="@style.css"/>
+                <Separator/>
+                <Label text="Existing types for this event:"/>
+                <ListView fx:id="listTypes" prefHeight="150.0"/>
+                <Button text="Delete Selected" onAction="#handleDeleteType" styleClass="action-button-remove" stylesheets="@style.css"/>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
