@@ -5,17 +5,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="handlePrintTicket" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.TicketController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.TicketController">
    <children>
       <TableView fx:id="tblTicket" layoutX="51.0" layoutY="25.0" prefHeight="272.0" prefWidth="493.0">
         <columns>
-          <TableColumn fx:id="colTicketName" prefWidth="418.6666259765625" text="Ticket NamE" />
+          <TableColumn fx:id="colTicketName" prefWidth="418.6666259765625" text="Ticket NamEeeeeee" />
         </columns>
       </TableView>
-      <Button layoutX="483.0" layoutY="348.0" mnemonicParsing="false" text="Print" />
-      <Button fx:id="handleCreateTicket" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" text="Create" />
-      <Button fx:id="handleEditTicket" layoutX="76.0" layoutY="335.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Edit" />
-      <Button fx:id="handleDeleteTicket" layoutX="142.0" layoutY="335.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="handleSendTicket" layoutX="418.0" layoutY="348.0" mnemonicParsing="false" text="Send" />
+      <Button layoutX="483.0" layoutY="348.0" mnemonicParsing="false" onAction="#handlePrintTicket" text="Print" />
+      <Button layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleCreateTicket" text="Create" />
+      <Button layoutX="76.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleEditTicket" prefHeight="25.0" prefWidth="51.0" text="Edit" />
+      <Button layoutX="142.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleDeleteTicket" text="Delete" />
+      <Button layoutX="418.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleSendTicket" text="Send" />
    </children>
 </AnchorPane>

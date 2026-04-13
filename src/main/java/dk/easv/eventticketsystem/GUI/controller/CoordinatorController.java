@@ -197,5 +197,6 @@ public class CoordinatorController {
 
     @FXML
     private void handleStandaloneTicket(ActionEvent actionEvent) {
+
     }
 }
