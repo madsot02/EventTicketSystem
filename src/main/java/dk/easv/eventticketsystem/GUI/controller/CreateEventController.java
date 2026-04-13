@@ -28,6 +28,7 @@ public class CreateEventController {
     @FXML private DatePicker txtStartDate;
     @FXML private TextField txtTicketsAvailable;
     @FXML private ListView<User> listViewCoordinators;
+    @FXML private TextField txtPrice;
 
     private EventModel eventModel;
     private UserModel userModel;
@@ -95,6 +96,7 @@ public class CreateEventController {
             txtTicketsAvailable.setText(String.valueOf(event.getTicketsAvailable()));
             cBoxTimeSelectStart.setValue(event.getStartTime());
             cBoxTimeSelectEnd.setValue(event.getEndTime());
+            txtPrice.setText(String.valueOf(event.getPrice()));
             editBtn.setText("Edit Event");
             applyRolePermissions();
 
@@ -129,6 +131,25 @@ public class CreateEventController {
         String location = txtLocation.getText().trim();
         String description = txtAreaDescription.getText().trim();
         String ticketsText = txtTicketsAvailable.getText().trim();
+        String priceText = txtPrice.getText().trim();
+        double price;
+
+        try{
+            price = Double.parseDouble(priceText);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Price");
+            alert.setHeaderText("Price must be a valid number");
+            alert.showAndWait();
+            return;
+        }
+        if (price < 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Price");
+            alert.setHeaderText("Price cannot be negative");
+            alert.showAndWait();
+            return;
+        }
 
         if (name.isEmpty() || startDate == null || endDate == null || location.isEmpty() || startTime == null || endTime == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -184,6 +205,7 @@ public class CreateEventController {
                     editingEvent.setLocation(location);
                     editingEvent.setDescription(description);
                     editingEvent.setTicketsAvailable(ticketsAvailable);
+                    editingEvent.setPrice(price);
 
                     eventModel.updateEvent(editingEvent);
                 }
@@ -191,7 +213,7 @@ public class CreateEventController {
                 savedEvent = editingEvent;
 
             } else {
-                Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, false);
+                Event newEvent = new Event(0, name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, false, price);
                 savedEvent = eventModel.createEvent(newEvent);
             }
 
@@ -248,6 +270,7 @@ public class CreateEventController {
             cBoxTimeSelectStart.setDisable(true);
             cBoxTimeSelectEnd.setDisable(true);
             txtTicketsAvailable.setEditable(false);
+            txtPrice.setEditable(false);
 
             listViewCoordinators.setDisable(false);
 
@@ -263,6 +286,7 @@ public class CreateEventController {
             cBoxTimeSelectStart.setDisable(false);
             cBoxTimeSelectEnd.setDisable(false);
             txtTicketsAvailable.setEditable(true);
+            txtPrice.setEditable(true);
 
             listViewCoordinators.setDisable(false);
 

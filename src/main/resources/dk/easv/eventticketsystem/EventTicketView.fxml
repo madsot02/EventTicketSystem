@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.easv.eventticketsystem.GUI.controller.EventTicketController">
+   <children>
+      <TextField fx:id="txtCustomerFullName" layoutX="79.0" layoutY="89.0" promptText="Customer Full Name" />
+      <TextField fx:id="txtCustomerMail" layoutX="300.0" layoutY="89.0" promptText="Customer Mail" />
+      <ComboBox fx:id="cbTicketType" layoutX="225.0" layoutY="143.0" prefWidth="150.0" promptText="Ticket Types" />
+      <Button layoutX="168.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleSavePdf" text="Print Ticket" />
+      <Button layoutX="315.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleSendMail" text="Send Email" />
+      <TextField fx:id="txtNumberOfTickets" layoutX="219.0" layoutY="188.0" promptText="Number of Tickets" />
+      <Label fx:id="lblPrice" layoutX="492.0" layoutY="147.0" text="Label" />
+   </children>
+</AnchorPane>

@@ -16,14 +16,18 @@ public class TicketDAO_DB implements ITicketDataAccess {
     @Override
     public Ticket createTicket(Ticket ticket) throws Exception {
         String uuid = java.util.UUID.randomUUID().toString();
-        String sql = "INSERT INTO dbo.Tickets (ticketUUID, eventId, typeName, isVoucher) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO dbo.Tickets (ticketUUID, eventId, typeName, isUsed, customerName, customerEmail, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, uuid);
             if (ticket.getEventId() != null) stmt.setInt(2, ticket.getEventId());
             else stmt.setNull(2, Types.INTEGER);
             stmt.setString(3, ticket.getTypeName());
-            stmt.setBoolean(4, ticket.getIsVoucher());
+
+            stmt.setBoolean(4, false );
+            stmt.setString(5,ticket.getCustomerName());
+            stmt.setString(6,ticket.getCustomerEmail());
+            stmt.setDouble(7,ticket.getPrice());
             stmt.executeUpdate();
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -37,64 +41,7 @@ public class TicketDAO_DB implements ITicketDataAccess {
         }
     }
 
-    @Override
-    public List<Ticket> getTicketsForEvent(int eventId) throws Exception {
-        List<Ticket> list = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.Tickets WHERE eventId = ? AND isVoucher = 0";
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, eventId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                list.add(mapRow(rs));
-            }
-            return list;
-        } catch (Exception ex) {
-            throw new Exception("Could not get tickets", ex);
-        }
-    }
-
-    @Override
-    public List<Ticket> getAllVouchers() throws Exception {
-        List<Ticket> list = new ArrayList<>();
-        String sql = "SELECT * FROM dbo.Tickets WHERE isVoucher = 1";
-        try (Connection conn = databaseConnector.getConnection();
-             Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                list.add(mapRow(rs));
-            }
-            return list;
-        } catch (Exception ex) {
-            throw new Exception("Could not get vouchers", ex);
-        }
-    }
-
-    @Override
-    public void markTicketUsed(int ticketId) throws Exception {
-        String sql = "UPDATE dbo.Tickets SET isUsed = 1 WHERE ticketId = ?";
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, ticketId);
-            stmt.executeUpdate();
-        } catch (Exception ex) {
-            throw new Exception("Could not mark ticket as used", ex);
-        }
-    }
-
-    @Override
-    public void deleteTicket(int ticketId) throws Exception {
-        String sql = "DELETE FROM dbo.Tickets WHERE ticketId = ?";
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, ticketId);
-            stmt.executeUpdate();
-        } catch (Exception ex) {
-            throw new Exception("Could not delete ticket", ex);
-        }
-    }
-
-    private Ticket mapRow(ResultSet rs) throws SQLException {
+   /* private Ticket mapRow(ResultSet rs) throws SQLException {
         int eid = rs.getInt("eventId");
         return new Ticket(
                 rs.getInt("ticketId"),
@@ -104,5 +51,5 @@ public class TicketDAO_DB implements ITicketDataAccess {
                 rs.getBoolean("isVoucher"),
                 rs.getBoolean("isUsed")
         );
-    }
+    }*/
 }

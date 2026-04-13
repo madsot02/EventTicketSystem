@@ -16,20 +16,4 @@ public class TicketManager {
     public Ticket createTicket(Ticket ticket) throws Exception {
         return ticketDataAccess.createTicket(ticket);
     }
-
-    public List<Ticket> getTicketsForEvent(int eventId) throws Exception {
-        return ticketDataAccess.getTicketsForEvent(eventId);
-    }
-
-    public List<Ticket> getAllVouchers() throws Exception {
-        return ticketDataAccess.getAllVouchers();
-    }
-
-    public void markTicketUsed(int ticketId) throws Exception {
-        ticketDataAccess.markTicketUsed(ticketId);
-    }
-
-    public void deleteTicket(int ticketId) throws Exception {
-        ticketDataAccess.deleteTicket(ticketId);
-    }
 }

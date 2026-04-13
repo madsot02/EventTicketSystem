@@ -3,6 +3,7 @@ package dk.easv.eventticketsystem.GUI.controller;
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
+import dk.easv.eventticketsystem.GUI.model.TicketModel;
 import dk.easv.eventticketsystem.GUI.utils.TableViewSwitcher;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -42,6 +43,8 @@ public class CoordinatorController {
     private TextArea txtAreaDescriptionMain;
 
     private EventModel eventModel;
+
+    private TicketModel ticketModel;
 
     private TableViewSwitcher status;
 
@@ -157,7 +160,27 @@ public class CoordinatorController {
     }
 
     @FXML
-    private void handleCreateTicket(ActionEvent actionEvent) {
+    private void handleCreateTicket(ActionEvent actionEvent) throws IOException {
+        Event selectedEvent = tblEvents.getSelectionModel().getSelectedItem();
+        if(selectedEvent != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/EventTicketView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+
+            stage.setTitle("Edit Event");
+            stage.setScene(scene);
+
+            EventTicketController controller = loader.getController();
+            controller.setEvent(selectedEvent);
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No selection");
+            alert.setHeaderText("Must select an event to create ticket");
+            alert.showAndWait();
+        }
     }
 
     @FXML
