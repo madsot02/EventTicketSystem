@@ -194,4 +194,8 @@ public class CoordinatorController {
     private void handleDeletedTableView(ActionEvent actionEvent) {
         filteredEvents.setPredicate(Event::getIsDeleted);
     }
+
+    @FXML
+    private void handleStandaloneTicket(ActionEvent actionEvent) {
+    }
 }
