@@ -6,7 +6,7 @@ import dk.easv.eventticketsystem.BE.TicketType;
 import dk.easv.eventticketsystem.BLL.utils.TicketPDFGenerator;
 import dk.easv.eventticketsystem.GUI.model.TicketModel;
 import dk.easv.eventticketsystem.GUI.model.TicketTypeModel;
-import dk.easv.eventticketsystem.GUI.utils.CartItem;
+import dk.easv.eventticketsystem.BE.CartItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

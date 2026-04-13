@@ -1,6 +1,5 @@
-package dk.easv.eventticketsystem.GUI.utils;
+package dk.easv.eventticketsystem.BE;
 
-import dk.easv.eventticketsystem.BE.TicketType;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
