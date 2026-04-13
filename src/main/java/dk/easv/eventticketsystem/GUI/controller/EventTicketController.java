@@ -47,11 +47,16 @@ public class EventTicketController  {
             String selected = cbTicketType.getSelectionModel().getSelectedItem();
             cbTicketType.setPromptText(selected);
         });
+
+        txtNumberOfTickets.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateTotalPrice();
+        });
     }
 
     public void setEvent(Event event){
         this.currentEvent = event;
-        lblPrice.setText(String.valueOf(event.getPrice()));
+        updateTotalPrice();
+
     }
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
@@ -59,11 +64,25 @@ public class EventTicketController  {
     @FXML
     private void handleSavePdf(ActionEvent actionEvent) {
         try {
+
+            if (txtCustomerFullName.getText().isEmpty()
+                    || txtCustomerMail.getText().isEmpty()
+                    || txtNumberOfTickets.getText().isEmpty()
+                    || cbTicketType.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Please fill in all fields!");
+                alert.show();
+                return;
+            }
+
+            createdTickets.clear();
+
             String name = txtCustomerFullName.getText();
             String email = txtCustomerMail.getText();
             String type = cbTicketType.getValue();
             int amount = Integer.parseInt(txtNumberOfTickets.getText());
-            double price = Double.parseDouble(lblPrice.getText());
+            double price = currentEvent.getPrice();
 
             for (int i = 0; i < amount; i++) {
                 Ticket ticket = new Ticket(
@@ -100,6 +119,19 @@ public class EventTicketController  {
     private void handleSendMail(ActionEvent actionEvent) {
     }
 
+    private void updateTotalPrice() {
+        try {
+            if (currentEvent == null) return;
 
+            int amount = Integer.parseInt(txtNumberOfTickets.getText());
+            double pricePerTicket = currentEvent.getPrice();
+            double totalPrice = amount * pricePerTicket;
+
+            lblPrice.setText(String.format("%d x %.2f = %.2f DKK", amount, pricePerTicket, totalPrice));
+
+        } catch (NumberFormatException e) {
+            lblPrice.setText("0 DKK");
+        }
+    }
 
 }
