@@ -14,9 +14,8 @@ public class Event {
     private String endTime;
     private boolean isDeleted;
     private String assignedCoordinators = "";
-    private double price;
 
-    public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime, boolean isDeleted, double price){
+    public Event(int id, String name, String description, String location, int ticketsAvailable, LocalDate startDate, LocalDate endDate, String startTime, String endTime, boolean isDeleted){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -27,7 +26,6 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.isDeleted = isDeleted;
-        this.price = price;
     }
 
     public int getId() {
@@ -105,13 +103,6 @@ public class Event {
     public boolean getIsDeleted(){return isDeleted;}
 
     public void setIsDeleted(boolean isDeleted){this.isDeleted = isDeleted;}
-
-    public double getPrice(){
-        return price;
-    }
-    public void setPrice(double price){
-        this.price = price;
-    }
 
     public String getAssignedCoordinators() {
         return assignedCoordinators;

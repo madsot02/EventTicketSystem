@@ -18,7 +18,7 @@ public class EventDAO_DB implements IEventDataAccess {
 
     @Override
     public Event createEvent(Event newEvent) throws Exception {
-        String sql = "INSERT INTO dbo.Events (name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO dbo.Events (name, description, location, ticketsAvailable, startDate, endDate, startTime, endTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -60,8 +60,7 @@ public class EventDAO_DB implements IEventDataAccess {
                 rs.getDate("endDate").toLocalDate(),
                 rs.getString("startTime"),
                 rs.getString("endTime"),
-                rs.getBoolean("isDeleted"),
-                        rs.getDouble("price"));
+                rs.getBoolean("isDeleted"));
 
                 allEvents.add(event);
             }
@@ -74,14 +73,14 @@ public class EventDAO_DB implements IEventDataAccess {
 
     @Override
     public void updateEvent(Event updateEvent) throws Exception {
-       String sql ="UPDATE dbo.Events SET name = ?, description = ? , location = ?, ticketsAvailable= ?, startDate = ?, endDate = ?, startTime = ?, endTime = ?, price = ? WHERE eventId = ? ;";
+       String sql ="UPDATE dbo.Events SET name = ?, description = ? , location = ?, ticketsAvailable= ?, startDate = ?, endDate = ?, startTime = ?, endTime = ? WHERE eventId = ? ;";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             statementHelper(updateEvent, stmt);
 
-            stmt.setInt(10,updateEvent.getId());
+            stmt.setInt(9,updateEvent.getId());
 
             stmt.executeUpdate();
 
@@ -170,6 +169,5 @@ public class EventDAO_DB implements IEventDataAccess {
         stmt.setDate(6, Date.valueOf(newEvent.getEndDate()));
         stmt.setString(7, newEvent.getStartTime());
         stmt.setString(8, newEvent.getEndTime());
-        stmt.setDouble(9,newEvent.getPrice());
     }
 }
