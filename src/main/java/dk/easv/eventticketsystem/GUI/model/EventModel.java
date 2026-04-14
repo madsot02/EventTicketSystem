@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 
-public class EventModel{
+public class EventModel {
     private EventManager eventManager;
     private ObservableList<Event> events;
 
@@ -39,7 +39,6 @@ public class EventModel{
 
     public void updateEvent(Event updateEvent) throws Exception {
         eventManager.updateEvent(updateEvent);
-
         int index = events.indexOf(updateEvent);
         if (index != -1) {
             events.set(index, updateEvent);
@@ -49,9 +48,12 @@ public class EventModel{
     public void deleteEvent(Event selectedEvent) throws Exception {
         eventManager.deleteEvent(selectedEvent);
         selectedEvent.setIsDeleted(true);
-        events.remove(selectedEvent);
-        events.add(selectedEvent);
+        int index = events.indexOf(selectedEvent);
+        if (index != -1) {
+            events.set(index, selectedEvent);
+        }
     }
+
     public void addCoordinatorToEvent(int eventId, int userId) throws Exception {
         eventManager.addCoordinatorToEvent(eventId, userId);
     }
@@ -63,6 +65,7 @@ public class EventModel{
     public List<User> getCoordinatorsForEvent(int eventId) throws Exception {
         return eventManager.getCoordinatorsForEvent(eventId);
     }
+
     public void refreshCoordinators(Event event) throws Exception {
         List<User> coords = eventManager.getCoordinatorsForEvent(event.getId());
         String names = coords.stream()
@@ -76,4 +79,3 @@ public class EventModel{
         }
     }
 }
-

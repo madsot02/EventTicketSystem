@@ -8,7 +8,7 @@ public class UserSession {
 
     private UserSession() {}
 
-    public static UserSession getInstance() {
+    public static synchronized UserSession getInstance() {
         if (instance == null) {
             instance = new UserSession();
         }

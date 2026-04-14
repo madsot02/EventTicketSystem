@@ -50,7 +50,6 @@
                     <placeholder><Label text="No tickets added yet"/></placeholder>
                 </TableView>
 
-                <!-- Total pris -->
                 <HBox alignment="CENTER_RIGHT">
                     <children>
                         <Label fx:id="lblTotal" styleClass="title-text" stylesheets="@style.css" text="Total: 0,00 kr">
@@ -72,7 +71,6 @@
         <HBox alignment="CENTER_RIGHT" spacing="10.0" prefHeight="60.0">
             <padding><Insets bottom="15.0" right="20.0"/></padding>
             <children>
-                <Button text="Send Email" onAction="#handleSendMail"/>
                 <Button text="Print Ticket" onAction="#handleSavePdf"
                         styleClass="add-user-button" stylesheets="@style.css"/>
             </children>

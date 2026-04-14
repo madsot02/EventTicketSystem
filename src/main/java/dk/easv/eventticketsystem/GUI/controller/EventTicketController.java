@@ -131,7 +131,6 @@ public class EventTicketController {
         for (CartItem item : cart) {
             if (item.getTicketType().getTypeId() == selectedType.getTypeId()) {
                 item.amountProperty().set(item.getAmount() + amount);
-                tblCart.refresh();
                 updateTotalPrice();
                 txtAmount.clear();
                 cbTicketType.getSelectionModel().clearSelection();
@@ -152,15 +151,14 @@ public class EventTicketController {
         lblTotal.setText(String.format("Total: %.2f DKK", total));
     }
 
+    private boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".")
+                && email.indexOf("@") < email.lastIndexOf(".");
+    }
+
     @FXML
     private void handleSavePdf(ActionEvent actionEvent) {
         validateAndPrint();
-    }
-
-    // FIX #1: handleSendMail now exists so the button no longer crashes
-    @FXML
-    private void handleSendMail(ActionEvent actionEvent) {
-        new Alert(Alert.AlertType.INFORMATION, "Email functionality is not yet implemented.").showAndWait();
     }
 
     private void validateAndPrint() {
@@ -173,19 +171,23 @@ public class EventTicketController {
         }
 
         boolean hasNonVoucher = cart.stream().anyMatch(i -> !i.getTicketType().isVoucher());
+
         if (hasNonVoucher && (name.isEmpty() || email.isEmpty())) {
             new Alert(Alert.AlertType.WARNING, "Write both customer name and email for normal tickets").showAndWait();
             return;
         }
 
-        // FIX #2: Show file chooser BEFORE saving tickets to the DB
-        // so we don't write to the DB if the user cancels
+        if (hasNonVoucher && !isValidEmail(email)) {
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid email address").showAndWait();
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Tickets As");
         fileChooser.setInitialFileName("tickets_" + currentEvent.getName() + ".pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
         File outputFile = fileChooser.showSaveDialog(tblCart.getScene().getWindow());
-        if (outputFile == null) return; // user cancelled
+        if (outputFile == null) return;
 
         try {
             List<Ticket> allTickets = new ArrayList<>();
