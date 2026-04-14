@@ -167,7 +167,7 @@ public class CoordinatorController {
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
 
-            stage.setTitle("Edit Event");
+            stage.setTitle("Create Ticket");
             stage.setScene(scene);
 
             EventTicketController controller = loader.getController();
@@ -202,6 +202,7 @@ public class CoordinatorController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
 
     @FXML
     private void handleActiveTableView(ActionEvent actionEvent) {

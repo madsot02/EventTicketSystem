@@ -41,6 +41,28 @@ public class TicketDAO_DB implements ITicketDataAccess {
         }
     }
 
+    public boolean markTicketAsUsed(String uuid) throws Exception {
+        // Tjek først om den allerede er used
+        String checkSql = "SELECT isUsed FROM dbo.Tickets WHERE ticketUUID = ?";
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(checkSql)) {
+            stmt.setString(1, uuid);
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next()) throw new Exception("Ticket not found: " + uuid);
+            boolean alreadyUsed = rs.getBoolean("isUsed");
+            if (alreadyUsed) return true;
+        }
+
+        // Opdater til used
+        String updateSql = "UPDATE dbo.Tickets SET isUsed = 1 WHERE ticketUUID = ?";
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(updateSql)) {
+            stmt.setString(1, uuid);
+            stmt.executeUpdate();
+        }
+        return false;
+    }
+
    /* private Ticket mapRow(ResultSet rs) throws SQLException {
         int eid = rs.getInt("eventId");
         return new Ticket(

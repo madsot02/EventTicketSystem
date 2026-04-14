@@ -104,9 +104,14 @@ public class AdminController {
     @FXML
     private void handleAddUser(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CreateUserView.fxml"));
+
+        if (loader.getLocation() == null) {
+            System.err.println("FXML file not found!");
+            return;
+        }
+
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-
         stage.setTitle("Create User");
         stage.setScene(scene);
 
