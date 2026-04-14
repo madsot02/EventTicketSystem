@@ -73,7 +73,7 @@ public class EventTicketController {
 
         // Fjern-knap kolonne
         colCartRemove.setCellFactory(col -> new TableCell<>() {
-            private final Button btn = new Button("Fjern");
+            private final Button btn = new Button("Remove");
             {
                 btn.setOnAction(e -> {
                     CartItem item = getTableView().getItems().get(getIndex());
@@ -110,11 +110,11 @@ public class EventTicketController {
         String amountText = txtAmount.getText().trim();
 
         if (selectedType == null) {
-            new Alert(Alert.AlertType.WARNING, "Vælg en ticket type").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Choose a ticket type").showAndWait();
             return;
         }
         if (amountText.isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Angiv antal").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Apply amount").showAndWait();
             return;
         }
 
@@ -123,7 +123,7 @@ public class EventTicketController {
             amount = Integer.parseInt(amountText);
             if (amount <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            new Alert(Alert.AlertType.ERROR, "Antal skal være et positivt tal").showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Amount must be positive").showAndWait();
             return;
         }
 
@@ -149,7 +149,7 @@ public class EventTicketController {
         double total = cart.stream()
                 .mapToDouble(CartItem::getSubtotal)
                 .sum();
-        lblTotal.setText(String.format("Total: %.2f kr", total));
+        lblTotal.setText(String.format("Total: %.2f DKK", total));
     }
 
     @FXML
@@ -159,7 +159,7 @@ public class EventTicketController {
 
     @FXML
     private void handleSendMail(ActionEvent actionEvent) {
-        new Alert(Alert.AlertType.INFORMATION, "Email funktionalitet kommer snart").showAndWait();
+        new Alert(Alert.AlertType.INFORMATION, "Email functionality coming soon").showAndWait();
     }
 
     private void validateAndPrint() {
@@ -167,14 +167,14 @@ public class EventTicketController {
         String email = txtCustomerMail.getText().trim();
 
         if (cart.isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Kurven er tom — tilføj mindst én ticket type").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "The cart is empty - Add at least one ticket type").showAndWait();
             return;
         }
 
         // Kun kræv kundeinfo hvis der er mindst én ikke-voucher i kurven
         boolean hasNonVoucher = cart.stream().anyMatch(i -> !i.getTicketType().isVoucher());
         if (hasNonVoucher && (name.isEmpty() || email.isEmpty())) {
-            new Alert(Alert.AlertType.WARNING, "Udfyld kundenavn og email for normale billetter").showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Write both customer name and email for normal tickets").showAndWait();
             return;
         }
 
@@ -201,7 +201,7 @@ public class EventTicketController {
             TicketPDFGenerator.generateTicket(allTickets, currentEvent);
 
             new Alert(Alert.AlertType.INFORMATION,
-                    allTickets.size() + " billet(ter) oprettet og PDF genereret!").showAndWait();
+                    allTickets.size() + " Ticket(s) created and PDF generated!").showAndWait();
 
             // Ryd klar til næste kunde
             cart.clear();
@@ -210,7 +210,7 @@ public class EventTicketController {
             updateTotalPrice();
 
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Fejl: " + e.getMessage()).showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).showAndWait();
             e.printStackTrace();
         }
     }

@@ -31,12 +31,12 @@
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
                     <children>
                         <ComboBox fx:id="cbTicketType" prefWidth="250.0" promptText="Select Ticket Type"/>
-                        <TextField fx:id="txtAmount" prefWidth="70.0" promptText="Antal"/>
-                        <Button text="+ Tilføj" onAction="#handleAddToCart" styleClass="add-user-button" stylesheets="@style.css"/>
+                        <TextField fx:id="txtAmount" prefWidth="70.0" promptText="Amount"/>
+                        <Button text="+ Add" onAction="#handleAddToCart" styleClass="add-user-button" stylesheets="@style.css"/>
                     </children>
                 </HBox>
 
-                <Label text="Kurv:">
+                <Label text="Cart:">
                     <font><Font size="13.0"/></font>
                 </Label>
                 <TableView fx:id="tblCart" prefHeight="160.0" prefWidth="480.0">
@@ -47,7 +47,7 @@
                         <TableColumn fx:id="colCartTotal" text="Subtotal" prefWidth="80.0"/>
                         <TableColumn fx:id="colCartRemove" text="" prefWidth="60.0"/>
                     </columns>
-                    <placeholder><Label text="Ingen billetter tilføjet endnu"/></placeholder>
+                    <placeholder><Label text="No tickets added yet"/></placeholder>
                 </TableView>
 
                 <!-- Total pris -->
