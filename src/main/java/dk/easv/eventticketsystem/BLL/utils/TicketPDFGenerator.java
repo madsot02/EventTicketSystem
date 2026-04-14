@@ -37,11 +37,14 @@ public class TicketPDFGenerator {
             document.add(new Paragraph("-----------------------------"));
 
             document.add(new Paragraph("Event: " + event.getName()));
+
             document.add(new Paragraph("Price: " + ticket.getPrice() + " DKK"));
             document.add(new Paragraph("Type: " + ticket.getTypeName()));
 
-            document.add(new Paragraph("Name: " + ticket.getCustomerName()));
-            document.add(new Paragraph("Email: " + ticket.getCustomerEmail()));
+            if (ticket.getCustomerName() != null && !ticket.getCustomerName().isEmpty()) {
+                document.add(new Paragraph("Name: " + ticket.getCustomerName()));
+                document.add(new Paragraph("Email: " + ticket.getCustomerEmail()));
+            }
 
             Image qrImage = generateQRCode(ticket.getTicketUUID());
             Image barcodeImage = generateBarcode1D(ticket.getTicketUUID());
