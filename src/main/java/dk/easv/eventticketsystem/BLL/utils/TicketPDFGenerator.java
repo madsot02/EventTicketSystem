@@ -19,11 +19,9 @@ import java.util.List;
 
 public class TicketPDFGenerator {
 
-    public static void generateTicket(List<Ticket> tickets, Event event) throws Exception {
+    public static void generateTicket(List<Ticket> tickets, Event event, File outputFile) throws Exception {
 
-        String fileName = "tickets_" + tickets.get(0).getTicketUUID() + ".pdf";
-
-        PdfWriter writer = new PdfWriter(fileName);
+        PdfWriter writer = new PdfWriter(outputFile);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf, PageSize.A5);
 

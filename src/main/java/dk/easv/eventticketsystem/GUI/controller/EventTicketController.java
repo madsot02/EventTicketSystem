@@ -15,9 +15,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +73,6 @@ public class EventTicketController {
         colCartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colCartTotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
 
-        // Fjern-knap kolonne
         colCartRemove.setCellFactory(col -> new TableCell<>() {
             private final Button btn = new Button("Remove");
             {
@@ -127,7 +128,6 @@ public class EventTicketController {
             return;
         }
 
-        // Hvis typen allerede er i kurven, læg antal oven i
         for (CartItem item : cart) {
             if (item.getTicketType().getTypeId() == selectedType.getTypeId()) {
                 item.amountProperty().set(item.getAmount() + amount);
@@ -157,9 +157,10 @@ public class EventTicketController {
         validateAndPrint();
     }
 
+    // FIX #1: handleSendMail now exists so the button no longer crashes
     @FXML
     private void handleSendMail(ActionEvent actionEvent) {
-        new Alert(Alert.AlertType.INFORMATION, "Email functionality coming soon").showAndWait();
+        new Alert(Alert.AlertType.INFORMATION, "Email functionality is not yet implemented.").showAndWait();
     }
 
     private void validateAndPrint() {
@@ -171,12 +172,20 @@ public class EventTicketController {
             return;
         }
 
-        // Kun kræv kundeinfo hvis der er mindst én ikke-voucher i kurven
         boolean hasNonVoucher = cart.stream().anyMatch(i -> !i.getTicketType().isVoucher());
         if (hasNonVoucher && (name.isEmpty() || email.isEmpty())) {
             new Alert(Alert.AlertType.WARNING, "Write both customer name and email for normal tickets").showAndWait();
             return;
         }
+
+        // FIX #2: Show file chooser BEFORE saving tickets to the DB
+        // so we don't write to the DB if the user cancels
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Tickets As");
+        fileChooser.setInitialFileName("tickets_" + currentEvent.getName() + ".pdf");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File outputFile = fileChooser.showSaveDialog(tblCart.getScene().getWindow());
+        if (outputFile == null) return; // user cancelled
 
         try {
             List<Ticket> allTickets = new ArrayList<>();
@@ -184,7 +193,6 @@ public class EventTicketController {
             for (CartItem cartItem : cart) {
                 TicketType type = cartItem.getTicketType();
 
-                // Vouchers får ikke kundenavn/email
                 String ticketName  = type.isVoucher() ? "" : name;
                 String ticketEmail = type.isVoucher() ? "" : email;
 
@@ -198,12 +206,11 @@ public class EventTicketController {
                 }
             }
 
-            TicketPDFGenerator.generateTicket(allTickets, currentEvent);
+            TicketPDFGenerator.generateTicket(allTickets, currentEvent, outputFile);
 
             new Alert(Alert.AlertType.INFORMATION,
-                    allTickets.size() + " Ticket(s) created and PDF generated!").showAndWait();
+                    allTickets.size() + " Ticket(s) created and PDF saved!").showAndWait();
 
-            // Ryd klar til næste kunde
             cart.clear();
             txtCustomerFullName.clear();
             txtCustomerMail.clear();
