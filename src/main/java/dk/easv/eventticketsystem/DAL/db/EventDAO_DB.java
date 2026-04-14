@@ -24,7 +24,6 @@ public class EventDAO_DB implements IEventDataAccess {
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             statementHelper(newEvent, stmt);
-
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -33,8 +32,7 @@ public class EventDAO_DB implements IEventDataAccess {
             }
             return newEvent;
 
-        } catch (
-                Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new Exception("Could not create event", ex);
         }
@@ -44,54 +42,48 @@ public class EventDAO_DB implements IEventDataAccess {
     public List<Event> getAllEvents() throws Exception {
         List<Event> allEvents = new ArrayList<>();
 
-        try(Connection conn = databaseConnector.getConnection();
-            Statement stmt = conn.createStatement()) {
+        try (Connection conn = databaseConnector.getConnection();
+             Statement stmt = conn.createStatement()) {
             String sql = "SELECT * FROM dbo.Events;";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 Event event = new Event(
-                rs.getInt("eventId"),
-                rs.getString("name"),
-                rs.getString("description"),
-                rs.getString("location"),
-                rs.getInt("ticketsAvailable"),
-                rs.getDate("startDate").toLocalDate(),
-                rs.getDate("endDate").toLocalDate(),
-                rs.getString("startTime"),
-                rs.getString("endTime"),
-                rs.getBoolean("isDeleted"));
+                        rs.getInt("eventId"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("location"),
+                        rs.getInt("ticketsAvailable"),
+                        rs.getDate("startDate").toLocalDate(),
+                        rs.getDate("endDate").toLocalDate(),
+                        rs.getString("startTime"),
+                        rs.getString("endTime"),
+                        rs.getBoolean("isDeleted"));
 
                 allEvents.add(event);
             }
             return allEvents;
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new Exception("Could not get movies", ex);
+            throw new Exception("Could not get events", ex); // Bug fix
         }
     }
 
     @Override
     public void updateEvent(Event updateEvent) throws Exception {
-       String sql ="UPDATE dbo.Events SET name = ?, description = ? , location = ?, ticketsAvailable= ?, startDate = ?, endDate = ?, startTime = ?, endTime = ? WHERE eventId = ? ;";
+        String sql = "UPDATE dbo.Events SET name = ?, description = ?, location = ?, ticketsAvailable = ?, startDate = ?, endDate = ?, startTime = ?, endTime = ? WHERE eventId = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             statementHelper(updateEvent, stmt);
-
-            stmt.setInt(9,updateEvent.getId());
-
+            stmt.setInt(9, updateEvent.getId());
             stmt.executeUpdate();
 
-
-
-        } catch (
-                Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new Exception("Could not edit event", ex);
         }
-
     }
 
     @Override
