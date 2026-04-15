@@ -25,7 +25,7 @@
     <center>
         <VBox BorderPane.alignment="CENTER">
 
-            <!-- TOP BAR -->
+
             <HBox alignment="CENTER_LEFT" prefHeight="64.0" spacing="10.0">
                 <padding><Insets left="24.0" right="24.0" top="20.0" bottom="8.0" /></padding>
                 <children>
@@ -48,12 +48,12 @@
 
             <Separator />
 
-            <!-- ACTION BAR -->
+
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="8.0">
                 <padding><Insets left="24.0" right="24.0" top="12.0" bottom="12.0" /></padding>
                 <children>
 
-                    <!-- Create Event: calendar + plus -->
+
                     <Button mnemonicParsing="false" onAction="#handleCreateEvent"
                             stylesheets="@style.css" text="Create Event">
                         <styleClass>
@@ -66,7 +66,7 @@
                         </graphic>
                     </Button>
 
-                    <!-- Create Ticket: ticket shape -->
+
                     <Button mnemonicParsing="false" onAction="#handleCreateTicket"
                             stylesheets="@style.css" text="Create Ticket">
                         <styleClass>
@@ -79,7 +79,7 @@
                         </graphic>
                     </Button>
 
-                    <!-- Edit Event: pencil -->
+
                     <Button mnemonicParsing="false" onAction="#handleEditEvent"
                             stylesheets="@style.css" text="Edit Event">
                         <styleClass>
@@ -94,7 +94,7 @@
 
                     <Region HBox.hgrow="ALWAYS" />
 
-                    <!-- Filter tabs -->
+
                     <Button mnemonicParsing="false" onAction="#handleActiveTableView"
                             text="Active" prefHeight="32.0" prefWidth="76.0" />
                     <Button mnemonicParsing="false" onAction="#handleArchivedTableView"
@@ -104,7 +104,7 @@
                 </children>
             </HBox>
 
-            <!-- SECTION LABEL -->
+
             <HBox>
                 <padding><Insets left="26.0" bottom="6.0" /></padding>
                 <children>
@@ -114,7 +114,7 @@
                 </children>
             </HBox>
 
-            <!-- TABLE -->
+
             <VBox VBox.vgrow="ALWAYS">
                 <padding><Insets left="20.0" right="20.0" bottom="0.0" /></padding>
                 <children>
@@ -133,7 +133,6 @@
                 </children>
             </VBox>
 
-            <!-- BOTTOM BAR: remove with trash icon -->
             <HBox alignment="CENTER_LEFT" prefHeight="56.0">
                 <padding><Insets left="24.0" top="10.0" /></padding>
                 <children>

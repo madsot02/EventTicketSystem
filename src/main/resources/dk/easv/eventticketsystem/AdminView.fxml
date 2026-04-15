@@ -25,7 +25,7 @@
     <center>
         <VBox BorderPane.alignment="CENTER">
 
-            <!-- TOP BAR -->
+
             <HBox alignment="CENTER_LEFT" prefHeight="64.0" spacing="10.0">
                 <padding><Insets left="24.0" right="24.0" top="20.0" bottom="8.0" /></padding>
                 <children>
@@ -49,12 +49,12 @@
 
             <Separator />
 
-            <!-- ACTION BAR -->
+
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="8.0">
                 <padding><Insets left="24.0" right="24.0" top="12.0" bottom="12.0" /></padding>
                 <children>
 
-                    <!-- Add User -->
+
                     <Button mnemonicParsing="false" onAction="#handleAddUser"
                             styleClass="add-user-button" stylesheets="@style.css" text="Add User">
                         <graphic>
@@ -63,7 +63,7 @@
                         </graphic>
                     </Button>
 
-                    <!-- Edit User: pencil -->
+
                     <Button mnemonicParsing="false" onAction="#handleEditUser"
                             styleClass="add-user-button" stylesheets="@style.css" text="Edit User">
                         <graphic>
@@ -72,7 +72,7 @@
                         </graphic>
                     </Button>
 
-                    <!-- Assign Coordinators: group icon -->
+
                     <Button mnemonicParsing="false" onAction="#handleAssignCoordinators"
                             styleClass="add-user-button" stylesheets="@style.css" text="Assign Coordinators">
                         <graphic>
@@ -86,12 +86,12 @@
                 </children>
             </HBox>
 
-            <!-- TWO-TABLE ROW -->
+
             <HBox spacing="16.0" VBox.vgrow="ALWAYS">
                 <padding><Insets left="24.0" right="24.0" bottom="0.0" /></padding>
                 <children>
 
-                    <!-- User Management -->
+
                     <VBox spacing="6.0" HBox.hgrow="ALWAYS">
                         <children>
                             <Label text="User Management" style="-fx-text-fill: -fx-mid-text-color;">
@@ -107,7 +107,7 @@
                         </children>
                     </VBox>
 
-                    <!-- Event Management -->
+
                     <VBox spacing="6.0" HBox.hgrow="ALWAYS">
                         <children>
                             <Label text="Event Management" style="-fx-text-fill: -fx-mid-text-color;">
@@ -128,12 +128,12 @@
                 </children>
             </HBox>
 
-            <!-- BOTTOM BAR -->
+
             <HBox alignment="CENTER_LEFT" prefHeight="56.0" spacing="8.0">
                 <padding><Insets left="24.0" top="10.0" /></padding>
                 <children>
 
-                    <!-- Remove Coordinator: person minus -->
+
                     <Button fx:id="btnRemoveCoordinatorOrEvent"
                             mnemonicParsing="false" onAction="#handleRemoveCoordinator"
                             styleClass="action-button-remove" stylesheets="@style.css"
@@ -144,7 +144,7 @@
                         </graphic>
                     </Button>
 
-                    <!-- Delete Event: trash -->
+
                     <Button mnemonicParsing="false" onAction="#handleDeleteEvent"
                             styleClass="action-button-remove" stylesheets="@style.css"
                             text="Delete Event">

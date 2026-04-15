@@ -2,7 +2,7 @@ package dk.easv.eventticketsystem.BE;
 
 public class TicketType {
     private int typeId;
-    private Integer eventId; // null = gælder alle events
+    private Integer eventId;
     private String typeName;
     private double price;
     private boolean isVoucher;

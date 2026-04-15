@@ -37,7 +37,6 @@ public class CoordinatorController {
     private TableViewSwitcher status;
     private FilteredList<Event> filteredEvents;
 
-    // Bug fix — removed "throws Exception" from signature
     public void initialize() {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -196,10 +195,5 @@ public class CoordinatorController {
     @FXML
     private void handleDeletedTableView(ActionEvent actionEvent) {
         filteredEvents.setPredicate(Event::getIsDeleted);
-    }
-
-    @FXML
-    private void handleStandaloneTicket(ActionEvent actionEvent) {
-        // Not implemented
     }
 }

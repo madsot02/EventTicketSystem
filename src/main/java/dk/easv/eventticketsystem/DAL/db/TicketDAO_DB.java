@@ -42,7 +42,7 @@ public class TicketDAO_DB implements ITicketDataAccess {
     }
 
     public boolean markTicketAsUsed(String uuid) throws Exception {
-        // Tjek først om den allerede er used
+
         String checkSql = "SELECT isUsed FROM dbo.Tickets WHERE ticketUUID = ?";
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(checkSql)) {
@@ -53,7 +53,7 @@ public class TicketDAO_DB implements ITicketDataAccess {
             if (alreadyUsed) return true;
         }
 
-        // Opdater til used
+
         String updateSql = "UPDATE dbo.Tickets SET isUsed = 1 WHERE ticketUUID = ?";
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(updateSql)) {
