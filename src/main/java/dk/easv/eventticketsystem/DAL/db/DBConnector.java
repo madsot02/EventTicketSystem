@@ -1,8 +1,10 @@
 package dk.easv.eventticketsystem.DAL.db;
 
+//dependency sql
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+//java imports
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class DBConnector {
         return dataSource.getConnection();
     }
 
+    //test connection
     public static void main(String[] args) throws Exception {
         DBConnector databaseConnector = new DBConnector();
 

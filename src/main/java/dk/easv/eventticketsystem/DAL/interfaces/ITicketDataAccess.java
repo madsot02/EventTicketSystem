@@ -1,8 +1,8 @@
-    package dk.easv.eventticketsystem.DAL.interfaces;
+package dk.easv.eventticketsystem.DAL.interfaces;
 
-    import dk.easv.eventticketsystem.BE.Ticket;
-    import java.util.List;
+//project imports
+import dk.easv.eventticketsystem.BE.Ticket;
 
-    public interface ITicketDataAccess {
-        Ticket createTicket(Ticket ticket) throws Exception;
-    }
+public interface ITicketDataAccess {
+    Ticket createTicket(Ticket ticket) throws Exception;
+}

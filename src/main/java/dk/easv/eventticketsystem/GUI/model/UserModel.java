@@ -1,8 +1,10 @@
 package dk.easv.eventticketsystem.GUI.model;
 
-import dk.easv.eventticketsystem.BE.Event;
+//project imports
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.UserManager;
+
+//java imports
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

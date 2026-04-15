@@ -1,10 +1,9 @@
 package dk.easv.eventticketsystem.BLL;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Ticket;
 import dk.easv.eventticketsystem.DAL.db.TicketDAO_DB;
 import dk.easv.eventticketsystem.DAL.interfaces.ITicketDataAccess;
-
-import java.util.List;
 
 public class TicketManager {
     private final ITicketDataAccess ticketDataAccess;

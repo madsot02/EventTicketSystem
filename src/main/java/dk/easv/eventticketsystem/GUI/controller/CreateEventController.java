@@ -1,23 +1,24 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
+
+//java imports
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateEventController {
-
     @FXML private TextField txtEnterEventName;
     @FXML private TextField txtLocation;
     @FXML private TextArea txtAreaDescription;
@@ -29,6 +30,7 @@ public class CreateEventController {
     @FXML private TextField txtTicketsAvailable;
     @FXML private ListView<User> listViewCoordinators;
 
+    //instantiate
     private EventModel eventModel;
     private UserModel userModel;
     private Event editingEvent = null;
@@ -36,10 +38,11 @@ public class CreateEventController {
     private List<User> previouslyAssigned = new ArrayList<>();
 
     public void initialize() {
+       //set time combobox
         initTime(cBoxTimeSelectEnd);
         initTime(cBoxTimeSelectStart);
 
-
+        //display full name
         listViewCoordinators.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(User user, boolean empty) {
@@ -48,11 +51,12 @@ public class CreateEventController {
             }
         });
 
+        //so you can choose more coordinators
         listViewCoordinators.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         try {
             userModel = new UserModel();
-            // Only show coordinators in the list
+            // only show coordinators in the list
             for (User u : userModel.getObservableUsers()) {
                 if (u.getRole() == Role.COORDINATOR) {
                     listViewCoordinators.getItems().add(u);
@@ -195,9 +199,7 @@ public class CreateEventController {
                 savedEvent = eventModel.createEvent(newEvent);
             }
 
-
             List<User> selectedNow = new ArrayList<>(listViewCoordinators.getSelectionModel().getSelectedItems());
-
 
             for (User u : selectedNow) {
                 boolean wasAssigned = previouslyAssigned.stream()
@@ -206,7 +208,6 @@ public class CreateEventController {
                     eventModel.addCoordinatorToEvent(savedEvent.getId(), u.getUserId());
                 }
             }
-
 
             for (User u : previouslyAssigned) {
                 boolean stillSelected = selectedNow.stream()
@@ -236,6 +237,7 @@ public class CreateEventController {
         }
     }
 
+    //admin and coordinator different permissions to edit events
     private void applyRolePermissions() {
         Role role = UserSession.getInstance().getCurrentUser().getRole();
 

@@ -1,9 +1,12 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
+
+//java imports
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +17,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class LoginController {
     @FXML private PasswordField pswPassword;
     @FXML private TextField txtUsername;
 
+    //instantiate
     private UserModel userModel;
     private UserSession session;
     private User user;
@@ -36,7 +39,6 @@ public class LoginController {
 
     @FXML
     private void onSignInClick(ActionEvent actionEvent) throws Exception {
-
         String username = txtUsername.getText();
         String password = pswPassword.getText();
 
@@ -50,7 +52,6 @@ public class LoginController {
             return;
         }
         session.setCurrentUser(user);
-
 
         if (user.getRole() == Role.COORDINATOR) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/eventticketsystem/CoordinatorView.fxml"));

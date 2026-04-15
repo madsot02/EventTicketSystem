@@ -1,12 +1,13 @@
 package dk.easv.eventticketsystem.GUI.model;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.EventManager;
 
+//java imports
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.List;
 
 public class EventModel {

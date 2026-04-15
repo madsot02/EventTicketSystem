@@ -1,10 +1,13 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
 import dk.easv.eventticketsystem.GUI.model.UserModel;
+
+//java imports
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,20 +18,19 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class AdminController {
 
-    // User table
+    //user table
     @FXML private TableView<User> tblAdmin;
     @FXML private TableColumn<User, String> colFullName;
     @FXML private TableColumn<User, String> colUsername;
     @FXML private TableColumn<User, String> colRole;
     @FXML private Button btnRemoveCoordinatorOrEvent;
 
-    // Event table
+    //event table
     @FXML private TableView<Event> tblEventManagement;
     @FXML private TableColumn<Event, String> colEventName;
     @FXML private TableColumn<Event, String> colEventLocation;
@@ -36,22 +38,24 @@ public class AdminController {
     @FXML private TableColumn<Event, LocalDate> colEndDateAdmin;
     @FXML private TableColumn colAssignedCoordinators;
 
+    //instantiate
     private UserModel userModel;
     private EventModel eventModel;
 
     public void initialize() {
-        // User table setup
+        //user table setup
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
 
-        // Event table setup
+        //event table setup
         colEventName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colEventLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         colStartDateAdmin.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         colEndDateAdmin.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
+        //listener so that when you hover table it shows description (tooltip) for event
         tblEventManagement.setRowFactory(tv -> {
             TableRow<Event> row = new TableRow<>();
             Tooltip tooltip = new Tooltip();
@@ -66,13 +70,13 @@ public class AdminController {
             return row;
         });
 
+        //loading userModel
         try {
             userModel = new UserModel();
             tblAdmin.setItems(userModel.getObservableUsers());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         try {
             eventModel = new EventModel();
@@ -146,7 +150,6 @@ public class AdminController {
             }
             return;
         }
-
 
         if (selectedUser == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -242,8 +245,6 @@ public class AdminController {
         }
         try{
             eventModel.deleteEvent(selectedEvent);
-
-            //filteredEvents.setPredicate(filteredEvents.getPredicate());
 
         } catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);

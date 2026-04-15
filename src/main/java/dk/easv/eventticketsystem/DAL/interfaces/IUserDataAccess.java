@@ -1,7 +1,9 @@
 package dk.easv.eventticketsystem.DAL.interfaces;
 
+//project imports
 import dk.easv.eventticketsystem.BE.User;
 
+//java imports
 import java.util.List;
 
 public interface IUserDataAccess {

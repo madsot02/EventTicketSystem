@@ -1,10 +1,12 @@
 package dk.easv.eventticketsystem.BLL;
 
+//project imports
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.BLL.utils.PasswordHasher;
 import dk.easv.eventticketsystem.DAL.db.UserDAO_DB;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
 
+//java imports
 import java.util.List;
 
 public class UserManager {
@@ -42,7 +44,6 @@ public class UserManager {
     }
 
     public void updateUser(User user) throws Exception {
-        // Bug  fix — only hash if it's a new plain text password, not an existing bcrypt hash
         if (user.getPassword() != null && !user.getPassword().isBlank()
                 && !user.getPassword().startsWith("$2")) {
             user.setPassword(PasswordHasher.hashPassword(user.getPassword()));

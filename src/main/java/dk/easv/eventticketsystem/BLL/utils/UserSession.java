@@ -1,7 +1,9 @@
 package dk.easv.eventticketsystem.BLL.utils;
 
+//project imports
 import dk.easv.eventticketsystem.BE.User;
 
+//manages the current logged in user
 public class UserSession {
     private static UserSession instance;
     private User currentUser;
@@ -15,6 +17,7 @@ public class UserSession {
         return instance;
     }
 
+    //set the current user (when logging in)
     public void setCurrentUser(User user) {
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null. Use clear() to log out.");
@@ -22,6 +25,7 @@ public class UserSession {
         this.currentUser = user;
     }
 
+    //get the currently logged in user
     public User getCurrentUser() {
         if (currentUser == null) {
             throw new IllegalStateException("No user is currently logged in.");
@@ -29,10 +33,7 @@ public class UserSession {
         return currentUser;
     }
 
-    public boolean isLoggedIn() {
-        return currentUser != null;
-    }
-
+    //clear currentuser when logging out
     public void clear() {
         currentUser = null;
     }

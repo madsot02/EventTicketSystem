@@ -1,5 +1,6 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Ticket;
 import dk.easv.eventticketsystem.BE.TicketType;
@@ -7,6 +8,8 @@ import dk.easv.eventticketsystem.BLL.utils.TicketPDFGenerator;
 import dk.easv.eventticketsystem.GUI.model.TicketModel;
 import dk.easv.eventticketsystem.GUI.model.TicketTypeModel;
 import dk.easv.eventticketsystem.BE.CartItem;
+
+//java imports
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +21,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventTicketController {
-
     @FXML private TextField txtCustomerFullName;
     @FXML private TextField txtCustomerMail;
     @FXML private ComboBox<TicketType> cbTicketType;
@@ -39,6 +40,7 @@ public class EventTicketController {
     @FXML private TableColumn<CartItem, Double> colCartTotal;
     @FXML private TableColumn<CartItem, Void> colCartRemove;
 
+    //instantiate
     private TicketModel ticketModel;
     private TicketTypeModel ticketTypeModel;
     private Event currentEvent;
@@ -53,6 +55,7 @@ public class EventTicketController {
             e.printStackTrace();
         }
 
+        //converts items to string
         cbTicketType.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(TicketType item, boolean empty) {
@@ -60,6 +63,8 @@ public class EventTicketController {
                 setText(empty || item == null ? null : item.toString());
             }
         });
+
+        //displays items
         cbTicketType.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(TicketType item, boolean empty) {
@@ -68,11 +73,13 @@ public class EventTicketController {
             }
         });
 
+        //sets ticket information
         colCartType.setCellValueFactory(new PropertyValueFactory<>("typeName"));
         colCartAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         colCartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colCartTotal.setCellValueFactory(new PropertyValueFactory<>("subtotal"));
 
+        //sets remove button in the table
         colCartRemove.setCellFactory(col -> new TableCell<>() {
             private final Button btn = new Button("Remove");
             {

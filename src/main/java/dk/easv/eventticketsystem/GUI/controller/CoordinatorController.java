@@ -1,10 +1,11 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BLL.utils.UserSession;
 import dk.easv.eventticketsystem.GUI.model.EventModel;
-import dk.easv.eventticketsystem.GUI.model.TicketModel;
-import dk.easv.eventticketsystem.GUI.utils.TableViewSwitcher;
+
+//java imports
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,12 +16,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
 public class CoordinatorController {
 
+    //event table
     public TableColumn<Event, String> colAssignedCoordinators;
     @FXML private TableView<Event> tblEvents;
     @FXML private TableColumn<Event, String> colName;
@@ -30,14 +31,13 @@ public class CoordinatorController {
     @FXML private TableColumn<Event, LocalDate> colEndDate;
     @FXML private TableColumn<Event, String> colStartTime;
     @FXML private TableColumn<Event, String> colEndTime;
-    @FXML private TextArea txtAreaDescriptionMain;
 
+    //instantiate
     private EventModel eventModel;
-    private TicketModel ticketModel;
-    private TableViewSwitcher status;
     private FilteredList<Event> filteredEvents;
 
     public void initialize() {
+       //setup event table
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -47,6 +47,7 @@ public class CoordinatorController {
         colTicketsAvailable.setCellValueFactory(new PropertyValueFactory<>("ticketsAvailable"));
         colAssignedCoordinators.setCellValueFactory(new PropertyValueFactory<>("assignedCoordinators"));
 
+        //listener so that when you hover table it shows description (tooltip) for event
         tblEvents.setRowFactory(tv -> {
             TableRow<Event> row = new TableRow<>();
             Tooltip tooltip = new Tooltip();
@@ -61,6 +62,7 @@ public class CoordinatorController {
             return row;
         });
 
+        //load events and filter to show only active ones in the table
         try {
             eventModel = new EventModel();
             filteredEvents = new FilteredList<>(eventModel.getObservableEvents());
@@ -182,6 +184,7 @@ public class CoordinatorController {
         stage.show();
     }
 
+    //switch tables
     @FXML
     private void handleActiveTableView(ActionEvent actionEvent) {
         filteredEvents.setPredicate(Event::isActive);

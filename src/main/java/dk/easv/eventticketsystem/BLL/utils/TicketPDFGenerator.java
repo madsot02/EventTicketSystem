@@ -1,26 +1,30 @@
 package dk.easv.eventticketsystem.BLL.utils;
 
+//dependency zxing
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
+//dependency itextpdf
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.*;
 import com.itextpdf.layout.*;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.UnitValue;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.Ticket;
 
+//java imports
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 
 public class TicketPDFGenerator {
 
+    //generates a ticket
     public static void generateTicket(List<Ticket> tickets, Event event, File outputFile) throws Exception {
-
         PdfWriter writer = new PdfWriter(outputFile);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf, PageSize.A5);
@@ -49,14 +53,14 @@ public class TicketPDFGenerator {
                 document.add(new Paragraph("Email: " + ticket.getCustomerEmail()));
             }
 
-            // QR code centreret
+            // QR code in center
             Image qrImage = generateQRCode(ticket.getTicketUUID());
             qrImage.setWidth(100);
             qrImage.setHeight(100);
             qrImage.setHorizontalAlignment(com.itextpdf.layout.properties.HorizontalAlignment.CENTER);
             document.add(qrImage);
 
-            // Barcode smallere og centreret under QR
+            // Barcode smaller and centered
             Image barcodeImage = generateBarcode1D(ticket.getTicketUUID());
             barcodeImage.setWidth(160);
             barcodeImage.setHeight(40);
@@ -75,6 +79,7 @@ public class TicketPDFGenerator {
         document.close();
     }
 
+    //generate a random
     private static Image generateQRCode(String text) throws Exception {
         int size = 140;
         BitMatrix matrix = new MultiFormatWriter()
@@ -84,6 +89,7 @@ public class TicketPDFGenerator {
         return new Image(com.itextpdf.io.image.ImageDataFactory.create(tempFile.toAbsolutePath().toString()));
     }
 
+    //generate a barcode
     private static Image generateBarcode1D(String text) throws Exception {
         int width = 220;
         int height = 60;

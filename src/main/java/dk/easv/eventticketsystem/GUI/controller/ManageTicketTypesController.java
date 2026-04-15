@@ -1,7 +1,10 @@
 package dk.easv.eventticketsystem.GUI.controller;
 
+//project imports
 import dk.easv.eventticketsystem.BE.TicketType;
 import dk.easv.eventticketsystem.GUI.model.TicketTypeModel;
+
+//java imports
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,6 +15,7 @@ public class ManageTicketTypesController {
     @FXML private CheckBox chkVoucher;
     @FXML private ListView<TicketType> listTypes;
 
+    //instantiate
     private TicketTypeModel ticketTypeModel;
     private int currentEventId;
 

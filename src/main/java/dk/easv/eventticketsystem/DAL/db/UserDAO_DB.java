@@ -1,10 +1,11 @@
 package dk.easv.eventticketsystem.DAL.db;
 
-import dk.easv.eventticketsystem.BE.Event;
+//project imports
 import dk.easv.eventticketsystem.BE.Role;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.DAL.interfaces.IUserDataAccess;
 
+//java imports
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

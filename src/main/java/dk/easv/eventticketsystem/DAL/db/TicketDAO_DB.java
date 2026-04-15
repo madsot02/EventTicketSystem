@@ -1,12 +1,12 @@
 package dk.easv.eventticketsystem.DAL.db;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Ticket;
 import dk.easv.eventticketsystem.DAL.interfaces.ITicketDataAccess;
 
+//java imports
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TicketDAO_DB implements ITicketDataAccess {
     private DBConnector databaseConnector = new DBConnector();
@@ -40,38 +40,4 @@ public class TicketDAO_DB implements ITicketDataAccess {
             throw new Exception("Could not create ticket", ex);
         }
     }
-
-    public boolean markTicketAsUsed(String uuid) throws Exception {
-
-        String checkSql = "SELECT isUsed FROM dbo.Tickets WHERE ticketUUID = ?";
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(checkSql)) {
-            stmt.setString(1, uuid);
-            ResultSet rs = stmt.executeQuery();
-            if (!rs.next()) throw new Exception("Ticket not found: " + uuid);
-            boolean alreadyUsed = rs.getBoolean("isUsed");
-            if (alreadyUsed) return true;
-        }
-
-
-        String updateSql = "UPDATE dbo.Tickets SET isUsed = 1 WHERE ticketUUID = ?";
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(updateSql)) {
-            stmt.setString(1, uuid);
-            stmt.executeUpdate();
-        }
-        return false;
-    }
-
-   /* private Ticket mapRow(ResultSet rs) throws SQLException {
-        int eid = rs.getInt("eventId");
-        return new Ticket(
-                rs.getInt("ticketId"),
-                rs.getString("ticketUUID"),
-                rs.wasNull() ? null : eid,
-                rs.getString("typeName"),
-                rs.getBoolean("isVoucher"),
-                rs.getBoolean("isUsed")
-        );
-    }*/
 }

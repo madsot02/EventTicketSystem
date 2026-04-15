@@ -1,10 +1,12 @@
 package dk.easv.eventticketsystem.BLL;
 
+//project imports
 import dk.easv.eventticketsystem.BE.Event;
 import dk.easv.eventticketsystem.BE.User;
 import dk.easv.eventticketsystem.DAL.db.EventDAO_DB;
 import dk.easv.eventticketsystem.DAL.interfaces.IEventDataAccess;
 
+//java imports
 import java.util.List;
 
 public class EventManager{

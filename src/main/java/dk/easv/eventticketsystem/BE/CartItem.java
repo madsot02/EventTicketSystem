@@ -1,5 +1,6 @@
 package dk.easv.eventticketsystem.BE;
 
+//java imports
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;

@@ -1,8 +1,10 @@
 package dk.easv.eventticketsystem.DAL.db;
 
+//project imports
 import dk.easv.eventticketsystem.BE.TicketType;
 import dk.easv.eventticketsystem.DAL.interfaces.ITicketTypeDataAccess;
 
+//java imports
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
