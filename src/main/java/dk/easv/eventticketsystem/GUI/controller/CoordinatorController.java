@@ -148,7 +148,7 @@ public class CoordinatorController {
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
 
-            stage.setTitle("Edit Event");
+            stage.setTitle("Create Ticket");
             stage.setScene(scene);
 
             EventTicketController controller = loader.getController();
