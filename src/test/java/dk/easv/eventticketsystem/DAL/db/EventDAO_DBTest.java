@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
         @BeforeEach
         void setUp() {
-            // A fresh test event before each test
+
             testEvent = new Event(
                     0,
                     "Test Event",
@@ -31,11 +31,9 @@ import static org.junit.jupiter.api.Assertions.*;
             );
         }
 
-        // --- Event BE tests (no DB needed) ---
 
         @Test
         void testEventIsActive() {
-            // End date is in the future, not deleted → should be active
             Event activeEvent = new Event(
                     1, "Active", "desc", "loc", 50,
                     LocalDate.now(),
@@ -48,7 +46,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
         @Test
         void testEventIsArchived() {
-            // End date is in the past, not deleted → should be archived
             Event archivedEvent = new Event(
                     2, "Archived", "desc", "loc", 50,
                     LocalDate.now().minusDays(10),
@@ -61,7 +58,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
         @Test
         void testEventIsDeleted() {
-            // isDeleted = true → neither active nor archived
             Event deletedEvent = new Event(
                     3, "Deleted", "desc", "loc", 50,
                     LocalDate.now(),
@@ -88,7 +84,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
         @Test
         void testTicketsAvailableCannotBeNegative() {
-            // Business rule: tickets should be positive
             testEvent.setTicketsAvailable(-5);
             assertTrue(testEvent.getTicketsAvailable() < 0, "Negative tickets should not be allowed — add validation if needed");
         }
